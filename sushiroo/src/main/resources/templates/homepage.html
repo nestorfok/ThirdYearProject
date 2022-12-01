@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <h1>Welcome</h1>
+    </div>
+    <div>
+        <form action="getAllSushi" method="GET">
+            <input type="submit" value="sushi" style="display: block;">
+        </form>
+        <form action="getHandRoll" method="GET">
+            <input type="submit" value="hand roll" style="display: block;">
+        </form>
+        <form action="getRoll" method="GET">
+            <input type="submit" value="roll" style="display: block;">
+        </form>
+        <form action="getGunkan" method="GET">
+            <input type="submit" value="gunkan" style="display: block;">
+        </form>
+        <form action="getSeared" method="GET">
+            <input type="submit" value="seared sushi" style="display: block;">
+        </form>
+    </div>
+</div>
+<table>
+    <tr th:each="sushi: ${allSushi}">
+        <td th:text="${sushi}"></td>
+    </tr>
+</table>
+</body>
+</html>
