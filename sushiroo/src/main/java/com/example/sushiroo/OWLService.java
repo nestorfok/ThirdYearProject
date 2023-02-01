@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OWLService {
@@ -23,19 +23,77 @@ public class OWLService {
     private OWLReasoner r;
 
     public OWLService() throws OWLOntologyCreationException {
-        IRI pizzaontology = IRI.create("http://protege.stanford.edu/ontologies/pizza/pizza.owl");
+        //IRI pizzaontology = IRI.create("http://protege.stanford.edu/ontologies/pizza/pizza.owl");
         File file = new File("/Users/chihinnestorfok/Documents/Year 3/COMP30040/Sushi.owl");
         //this.o = man.loadOntology(pizzaontology);
         this.o = man.loadOntologyFromOntologyDocument(file);
         this.r = rf.createReasoner(o);
+        r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
     }
 
-    public Collection<OWLClass> getSushi () {
-        Collection<OWLClass> sushi = new ArrayList<OWLClass>();
-        r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
-        r.getSubClasses(df.getOWLClass("http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"), true)
-                .forEach(a -> sushi.add(a.getRepresentativeElement()));
+    public List<String> getSushiFromType (String type) {
+
+        List<String> sushi = new ArrayList<>();
+        String irl = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
+        r.getSubClasses(df.getOWLClass(irl),
+                true).forEach(a -> {
+            List<String> remainders = a.entities()
+                    .map(entity -> entity.getIRI().getRemainder())
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
+            sushi.addAll(remainders);
+        });
+
+
+        for (int i = 0; i < sushi.size(); i++) {
+            String item = sushi.get(i);
+            StringBuilder modifiedItem = new StringBuilder();
+            modifiedItem.append(item.charAt(0));
+            for (int j = 1; j < item.length(); j++) {
+                if (Character.isUpperCase(item.charAt(j))) {
+                    modifiedItem.append(" ");
+                }
+                modifiedItem.append(item.charAt(j));
+            }
+            sushi.set(i, modifiedItem.toString());
+        }
+
         return sushi;
     }
 
+    public List<String> getSushiFromName (String name) {
+        List<String> sushi = new ArrayList<>();
+        List<String> sushiByName = new ArrayList<>();
+
+        String irl = "http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi";
+        r.getSubClasses(df.getOWLClass(irl),
+                true).forEach(a -> {
+            List<String> remainders = a.entities()
+                    .map(entity -> entity.getIRI().getRemainder())
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
+            sushi.addAll(remainders);
+        });
+
+        name = name.toLowerCase();
+        for (int i = 0; i < sushi.size(); i++) {
+            String item = sushi.get(i);
+            if (item.toLowerCase().contains(name)) {
+                StringBuilder modifiedItem = new StringBuilder();
+                modifiedItem.append(item.charAt(0));
+                for (int j = 1; j < item.length(); j++) {
+                    if (Character.isUpperCase(item.charAt(j))) {
+                        modifiedItem.append(" ");
+                    }
+                    modifiedItem.append(item.charAt(j));
+                }
+                sushiByName.add(modifiedItem.toString());
+            }
+        }
+
+        return sushiByName;
+
+    }
 }

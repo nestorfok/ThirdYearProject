@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmls:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
@@ -10,26 +10,23 @@
     <div>
         <h1>Welcome</h1>
     </div>
+    <div class="d-flex justify-content-center">
+        <form action="#" th:action="@{/sushi/search}" method="get">
+            <div class='form-inline'>
+                <input class="form-control mr-2" style="width: 500px;" type="search" name="query"
+                       th:value="${search_value}" id="search" placeholder="Sushi Name" autocomplete="off" />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+    <br>
     <div>
-        <form action="getAllSushi" method="GET">
-            <input type="submit" value="sushi" style="display: block;">
-        </form>
-        <form action="getHandRoll" method="GET">
-            <input type="submit" value="hand roll" style="display: block;">
-        </form>
-        <form action="getRoll" method="GET">
-            <input type="submit" value="roll" style="display: block;">
-        </form>
-        <form action="getGunkan" method="GET">
-            <input type="submit" value="gunkan" style="display: block;">
-        </form>
-        <form action="getSeared" method="GET">
-            <input type="submit" value="seared sushi" style="display: block;">
-        </form>
+        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
+        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='RollSushi')}">Roll Sushi</a>
     </div>
 </div>
 <table>
-    <tr th:each="sushi: ${allSushi}">
+    <tr th:each="sushi: ${allSushiFromType}">
         <td th:text="${sushi}"></td>
     </tr>
 </table>

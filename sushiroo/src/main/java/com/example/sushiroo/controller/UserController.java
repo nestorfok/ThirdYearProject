@@ -1,11 +1,8 @@
-package com.example.sushiroo;
+package com.example.sushiroo.controller;
 
-import org.semanticweb.HermiT.ReasonerFactory;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
+import com.example.sushiroo.OWLService;
+import com.example.sushiroo.User;
+import com.example.sushiroo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.http.HttpStatus;
@@ -13,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,9 +24,6 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private OWLService owlService;
 
     @GetMapping("")
     public String viewHomePage(){
@@ -61,36 +56,8 @@ public class UserController {
     }
 
     @GetMapping("/homepage")
-    public String getHomePage(Model model) throws OWLOntologyCreationException {
+    public String getHomePage() {
         return "homepage";
     }
 
-    @GetMapping("/getAllSushi")
-    public String getAllSushi(Model model) {
-        model.addAttribute("allSushi", owlService.getSushi());
-        return "homepage";
-    }
-
-    @GetMapping("/getHandRoll")
-    public String getHandRoll(Model model) {
-        model.addAttribute("allSushi", owlService.getSushi());
-        return "homepage";
-    }
-    @GetMapping("/getRoll")
-    public String getRoll(Model model) {
-        model.addAttribute("allSushi", owlService.getSushi());
-        return "homepage";
-    }
-
-    @GetMapping("/getGunkan")
-    public String getGunkan(Model model) {
-        model.addAttribute("allSushi", owlService.getSushi());
-        return "homepage";
-    }
-
-    @GetMapping("/getSeared")
-    public String getSeared(Model model) {
-        model.addAttribute("allSushi", owlService.getSushi());
-        return "homepage";
-    }
 }
