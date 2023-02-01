@@ -24,7 +24,7 @@ public class OWLService {
 
     public OWLService() throws OWLOntologyCreationException {
         //IRI pizzaontology = IRI.create("http://protege.stanford.edu/ontologies/pizza/pizza.owl");
-        File file = new File("/Users/chihinnestorfok/Documents/Year 3/COMP30040/Sushi.owl");
+        File file = new File("src/main/resources/static/Sushi.owl");
         //this.o = man.loadOntology(pizzaontology);
         this.o = man.loadOntologyFromOntologyDocument(file);
         this.r = rf.createReasoner(o);
