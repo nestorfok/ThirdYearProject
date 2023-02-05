@@ -49,32 +49,12 @@
     
 
 
-    <!-- http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen -->
 
-    <owl:ObjectProperty rdf:about="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient">
+    <owl:ObjectProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#isIngredientOf"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-        <rdfs:range>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#hasComponent -->
-
-    <owl:ObjectProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <owl:inverseOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#isComponentOf"/>
-        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Dish"/>
-        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
+        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
     </owl:ObjectProperty>
     
 
@@ -89,12 +69,14 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#isComponentOf -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient -->
 
-    <owl:ObjectProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#isComponentOf">
+    <owl:ObjectProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Dish"/>
+        <owl:inverseOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#isIngredientOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
+        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
     </owl:ObjectProperty>
     
 
@@ -113,15 +95,8 @@
 
     <owl:ObjectProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#isIngredientOf">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
+        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+        <rdfs:range rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
     </owl:ObjectProperty>
     
 
@@ -141,15 +116,8 @@
 
     <owl:DatatypeProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#hasCalories">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Dish"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
     </owl:DatatypeProperty>
     
 
@@ -169,6 +137,12 @@
 
     <owl:Class rdf:about="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Dairy">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#MilkAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -177,6 +151,12 @@
 
     <owl:Class rdf:about="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Egg">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#EggAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -184,24 +164,87 @@
     <!-- http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish -->
 
     <owl:Class rdf:about="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Seafood"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FishAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ShellFish"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Algae -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Abalone -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Algae">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Abalone">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTuna -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTuna">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Tuna"/>
+        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NormalTuna"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTuna"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Allergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ArkClam -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ArkClam">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Clam"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Avocado -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Avocado">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
-        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Corn"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BambooRolling -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BasilSauce -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BambooRolling">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BasilSauce">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
     </owl:Class>
     
 
@@ -210,6 +253,162 @@
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Beef">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Boiled -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Boiled">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Boiled"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Shrimp"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Broiled -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Broiled">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Broiled"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Radish"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Broiled"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BasilSauce"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Broiled"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -231,25 +430,17 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Component -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Clam -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Component">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Food"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCalories"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Clam">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
     </owl:Class>
     
 
 
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod">
-        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Food"/>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
     
 
 
@@ -261,22 +452,49 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CornSalad -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornSalad">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
                 <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Corn"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SaladSauce"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#MayoSauce"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Seaweed"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Crab -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Crab">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Crustacean"/>
+        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Shrimp"/>
     </owl:Class>
     
 
@@ -284,68 +502,114 @@
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#CrabStick -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabStick">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteFishSurimi"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ProcessedFood"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CrabStickRoll -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Crustacean -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabStickRoll">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Crustacean">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ShellFish"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CrustaceanShellfishAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CrustaceanShellfishAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrustaceanShellfishAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Cucumber -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Cucumber">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#EggAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#EggAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CrabStick"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
                 <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BambooRolling"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="en">Crab Stick Roll</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Dish -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FishAllergen -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Dish">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Food"/>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FishAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Flounder -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Flounder">
+        <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCalories"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Fermentation -->
-
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Fermentation">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Flounder"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -360,41 +624,6 @@
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Fried">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg -->
-
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Egg"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FriedEggSushi -->
-
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEggSushi">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label xml:lang="en">Fried Egg Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -415,6 +644,22 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Ginger -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Ginger">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#GlutenAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GlutenAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Grain -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Grain">
@@ -423,55 +668,50 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HandRoll -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Grilled -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HandRoll">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
-                        <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandRolling"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HandRolling -->
-
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HandRolling">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Grilled">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HokkaidoSweetCornSushi -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HokkaidoSweetCornSushi">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CornSalad"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Grilled"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasComponent"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mackerel"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
                 <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="en">Hokkaido Sweer Corn Sushi</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HandMold -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HandMold">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
     </owl:Class>
     
 
@@ -493,6 +733,34 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Mackerel -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Mackerel">
+        <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#MayoSauce -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#MayoSauce">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#EggAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SoyAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Meat -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Meat">
@@ -509,10 +777,116 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#MilkAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#MilkAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Mollusk -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ShellFish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#MozarellaCheese -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#MozarellaCheese">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Cheese"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Mussel -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Mussel">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Nigiri -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Nigiri">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                        <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#NormalTuna -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#NormalTuna">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Tuna"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Octopus -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Octopus">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Onion -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Onion">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Onion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -525,10 +899,42 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Oyster -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Oyster">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#PeanutAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#PeanutAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Pork -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Pork">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ProcessedFood -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ProcessedFood">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Radish -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Radish">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
     </owl:Class>
     
 
@@ -550,16 +956,16 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#RollSushi -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Roll -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#RollSushi">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Roll">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
-                        <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BambooRolling"/>
+                        <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -568,41 +974,160 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SaladSauce -->
-
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SaladSauce">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Egg"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegar"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SoySauce"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Salmon -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Salmon">
         <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
-        <owl:disjointWith rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Tuna"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonHandRoll -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonHandRoll">
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
-        <rdfs:label xml:lang="en">Salmon Hand Roll</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BasilSauce"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#MozarellaCheese"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoe -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoe">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Cucumber"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoe"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Seaweed"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Sardine -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sardine">
+        <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ginger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sardine"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -610,38 +1135,73 @@
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Sauce -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Saute -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Scallop -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Saute">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Scallop">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SeaBream -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaBream">
+        <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Algae"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeaBream"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SearedSalmonSushi -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Seafood -->
 
-    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SearedSalmonSushi">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
-        <rdfs:label xml:lang="en">Seared Salmon Sushi</rdfs:label>
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Seafood">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Seaweed -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Seaweed">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
     </owl:Class>
     
 
@@ -654,10 +1214,18 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SesameAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SesameAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#ShellFish -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShellFish">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Seafood"/>
     </owl:Class>
     
 
@@ -665,7 +1233,15 @@
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Shrimp -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Shrimp">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Crustacean"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SoyAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SoyAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
     </owl:Class>
     
 
@@ -676,20 +1252,14 @@
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Soybean"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#GlutenAllergen"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Wheat"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Yeast"/>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SoyAllergen"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -704,10 +1274,34 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Squid -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Squid">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Mollusk"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#Sushi -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sushi">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Dish"/>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Food"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TomatoSauce -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TomatoSauce">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TreeNutAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TreeNutAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
     </owl:Class>
     
 
@@ -716,6 +1310,32 @@
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Tuna">
         <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Tuna"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -740,6 +1360,20 @@
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Wheat">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Grain"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasAllergen"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WheatAllergen"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#WheatAllergen -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WheatAllergen">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
     </owl:Class>
     
 
@@ -771,19 +1405,7 @@
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice -->
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice">
-        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Rice"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#hasIngredient"/>
-                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegar"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Rice"/>
     </owl:Class>
     
 
@@ -792,6 +1414,40 @@
 
     <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Yeast">
         <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Fungus"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail">
+        <rdfs:subClassOf rdf:resource="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi -->
+
+    <owl:Class rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi">
+        <rdfs:subClassOf rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#NamedSushi"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasCookingMethod"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient"/>
+                <owl:someValuesFrom rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -807,11 +1463,218 @@
     
 
 
-    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ExampleFriedEggSushi -->
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi -->
 
-    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ExampleFriedEggSushi">
-        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FriedEggSushi"/>
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">42.5</hasCalories>
     </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">36.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">62.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">83.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">42.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">63.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">41.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">57.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">75.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">62.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">66.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">44.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">47.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">65.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">46.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.0</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">55.5</hasCalories>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Albacore Tuna Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Boiled Shrimp Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Broiled Fatty Salmon Radish Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Broiled Salmon w/Basil Sauce Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Broiled Young Yellowtail Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corn Mayo Salad Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fatty Yellowtail Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flounder Fin Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grilled Mackerel Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Onion Salmon Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmon Basil Mozzarella Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmon Roe Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmon Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sardine Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Seabream Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Young Yellowtail Sushi</rdfs:label>
+    </rdf:Description>
     
 
 
@@ -832,6 +1695,9 @@
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Fungus"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Grain"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Meat"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ProcessedFood"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Seafood"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Soybean"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Vegetable"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Vinegar"/>
@@ -840,88 +1706,113 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.bubblewaffle.com/ontologies/bubblewaffle.owl#Fish"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Beef"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Chicken"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Pork"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShellFish"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Shrimp"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Abalone"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Clam"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Mussel"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Octopus"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Oyster"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Scallop"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Squid"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BambooRolling"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Fermentation"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Allergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CookingMethod"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Food"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Avocado"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Corn"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Cucumber"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Ginger"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Onion"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Radish"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Seaweed"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BasilSauce"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#MayoSauce"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SoySauce"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TomatoSauce"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Beef"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Chicken"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Pork"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Boiled"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Broiled"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Fried"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HandRolling"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Grilled"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HandMold"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Raw"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Saute"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaweedRolling"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SemiRaw"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Component"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Dish"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Ingredient"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrustaceanShellfishAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#EggAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FishAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GlutenAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#MilkAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#PeanutAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SesameAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SoyAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TreeNutAllergen"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WheatAllergen"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornSalad"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabStick"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabStick"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabStickRoll"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEggSushi"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HokkaidoSweetCornSushi"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonHandRoll"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SearedSalmonSushi"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaWeed"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FriedEgg"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sauce"/>
-            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteVinegarRice"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Flounder"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Mackerel"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Salmon"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Sardine"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeaBream"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Tuna"/>
             <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#WhiteFish"/>
+            <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#Yellowtail"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>
