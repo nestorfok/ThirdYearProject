@@ -4,12 +4,34 @@
     <meta charset="UTF-8">
     <title>Users</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
 <div class="container text-center">
     <div>
         <h1>Welcome</h1>
     </div>
+
+    <div class="navbar hide" id="myNavbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </div>
+    <div id="navbarToggler">
+        <span style="position:absolute; top:0; left:0; font-size:30px;cursor:pointer" onclick="toggleNavbar()">
+            &#9776;</span>
+    </div>
+    <script>
+        function toggleNavbar() {
+          var x = document.getElementById("myNavbar");
+          if (x.className === "navbar hide") {
+            x.className = "navbar show";
+          } else {
+            x.className = "navbar hide";
+          }
+        }
+    </script>
     <div class="d-flex justify-content-center">
         <form action="#" th:action="@{/sushi/search}" method="get">
             <div class='form-inline'>
