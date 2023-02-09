@@ -122,6 +122,16 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#hasPrice -->
+
+    <owl:DatatypeProperty rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#hasPrice">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#Sushi"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -225,7 +235,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abalone Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -356,7 +365,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ark Shell Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -678,7 +686,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cod Milt Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -732,7 +739,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cod Roe Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -787,7 +793,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cooked Conger Eel Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -926,7 +931,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Crab Butter &amp; Crab Meat Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1222,7 +1226,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flyingfish Roe Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1350,7 +1353,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grilled Eel Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1459,7 +1461,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Herring Roe Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1507,7 +1508,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hokkigai Clam Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1561,7 +1561,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Japanese Egg Omelet Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1607,7 +1606,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kalbee Beef w/Salt Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -1931,7 +1929,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Premium Grill Conger Eel Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2429,7 +2426,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shrimp w/Avocado Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2482,7 +2478,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shrimp w/Cheese Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2586,7 +2581,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squid Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2632,7 +2626,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squid Tempura Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2800,7 +2793,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna Mayo Salad Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2893,7 +2885,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna w/Yam Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -2955,7 +2946,6 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ume Plum &amp; Cucumber Sushi</rdfs:label>
     </owl:Class>
     
 
@@ -3135,11 +3125,32 @@
     
 
 
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#AbaloneSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AbaloneSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#AbaloneSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">33.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi -->
 
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">42.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ArkShellSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ArkShellSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ArkShellSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">34.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3149,6 +3160,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">36.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3158,6 +3170,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledFattySalmonRadishSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">62.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3167,6 +3180,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledSalmonBasilSauceSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">83.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3176,6 +3190,37 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">42.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CodMiltSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CodMiltSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CodMiltSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">41.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CodRoeSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CodRoeSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CodRoeSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">44.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CookedCongerEelSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CookedCongerEelSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CookedCongerEelSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">49.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3185,6 +3230,17 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">63.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1.1</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#CrabButterCrabMeatSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabButterCrabMeatSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#CrabButterCrabMeatSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">40.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3194,6 +3250,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">41.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3203,6 +3260,27 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">57.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#FlyingfishRoeSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlyingfishRoeSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#FlyingfishRoeSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#GrilledEelSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledEelSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#GrilledEelSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">51.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3212,6 +3290,47 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">75.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HerringRoeSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HerringRoeSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HerringRoeSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">37.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#HokkigaiClamSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HokkigaiClamSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#HokkigaiClamSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">34.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#JapaneseEggOmeletSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#JapaneseEggOmeletSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#JapaneseEggOmeletSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">58.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#KalbeeBeefSaltSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#KalbeeBeefSaltSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#KalbeeBeefSaltSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">76.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3221,6 +3340,17 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">62.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#PremiumGrillCongerEelSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#PremiumGrillCongerEelSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#PremiumGrillCongerEelSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">33.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3230,6 +3360,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">66.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3239,6 +3370,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonRoeSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">44.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">3.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3248,6 +3380,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SalmonSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">47.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3257,6 +3390,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SardineSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">65.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3266,6 +3400,68 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">46.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ShrimpAvocadoSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpAvocadoSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpAvocadoSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">59.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#ShrimpCheeseSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpCheeseSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpCheeseSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">53.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SquidSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SquidSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SquidSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">33.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SquidTempuraSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SquidTempuraSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SquidTempuraSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">86.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#SquidUmePlumShisoSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SquidUmePlumShisoSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#SquidUmePlumAndShisoSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">36.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squid Ume Plum &amp; Shiso Sushi</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TunaMayoSaladSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaMayoSaladSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#TunaMayoSaladSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">75.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3275,6 +3471,27 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">39.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#TunaYamSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaYamSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#TunaYamSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">47.0</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.sushiro.com/ontologies/sushiro.owl#UmePlumCucumberSushi -->
+
+    <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#UmePlumCucumberSushi">
+        <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#UmePlumCucumberSushi"/>
+        <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">71.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">1.1</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3284,6 +3501,7 @@
     <owl:NamedIndividual rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi">
         <rdf:type rdf:resource="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi"/>
         <hasCalories rdf:datatype="http://www.w3.org/2001/XMLSchema#float">55.5</hasCalories>
+        <hasPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2.2</hasPrice>
     </owl:NamedIndividual>
     
 
@@ -3296,8 +3514,14 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AbaloneSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abalone Sushi</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#AlbacoreTunaSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Albacore Tuna Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ArkShellSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ark Shell Sushi</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BoiledShrimpSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Boiled Shrimp Sushi</rdfs:label>
@@ -3311,8 +3535,20 @@
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#BroiledYoungYellowtailSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Broiled Young Yellowtail Sushi</rdfs:label>
     </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CodMiltSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cod Milt Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CodRoeSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cod Roe Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CookedCongerEelSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cooked Conger Eel Sushi</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CornMayoSaladSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Corn Mayo Salad Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#CrabButterCrabMeatSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Crab Butter &amp; Crab Meat Sushi</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FattyYellowtailSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fatty Yellowtail Sushi</rdfs:label>
@@ -3320,11 +3556,32 @@
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlounderFinSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flounder Fin Sushi</rdfs:label>
     </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#FlyingfishRoeSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flyingfish Roe Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledEelSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grilled Eel Sushi</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#GrilledMackerelSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grilled Mackerel Sushi</rdfs:label>
     </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HerringRoeSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Herring Roe Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#HokkigaiClamSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hokkigai Clam Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#JapaneseEggOmeletSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Japanese Egg Omelet Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#KalbeeBeefSaltSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kalbee Beef w/Salt Sushi</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#OnionSalmonSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Onion Salmon Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#PremiumGrillCongerEelSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Premium Grill Conger Eel Sushi</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SalmonBasilMozzarellaSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Salmon Basil Mozzarella Sushi</rdfs:label>
@@ -3341,8 +3598,29 @@
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SeabreamSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Seabream Sushi</rdfs:label>
     </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpAvocadoSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shrimp w/Avocado Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#ShrimpCheeseSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Shrimp w/Cheese Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SquidSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squid Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#SquidTempuraSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Squid Tempura Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaMayoSaladSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna Mayo Salad Sushi</rdfs:label>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#TunaYamSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tuna w/Yam Sushi</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#UmePlumCucumberSushi">
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ume Plum &amp; Cucumber Sushi</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.sushiro.com/ontologies/sushiro.owl#YoungYellowtailSushi">
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Young Yellowtail Sushi</rdfs:label>

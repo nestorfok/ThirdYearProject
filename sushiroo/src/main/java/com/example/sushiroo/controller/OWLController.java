@@ -1,5 +1,6 @@
 package com.example.sushiroo.controller;
 
+import com.example.sushiroo.OWLEntity;
 import com.example.sushiroo.OWLService;
 import com.example.sushiroo.User;
 import com.example.sushiroo.UserRepository;
@@ -29,16 +30,22 @@ public class OWLController {
     @Autowired
     private OWLService owlService;
 
+    @GetMapping("/homepage")
+    public String getHomePage(Model model) {
+        model.addAttribute("allSushiFromType", owlService.getAllSushi());
+        return "homepage";
+    }
+
     @GetMapping("/sushi/{variable}")
     public String getAllSushi(@PathVariable String variable, Model model) {
-        model.addAttribute("allSushiFromType", owlService.getSushiFromType(variable));
+        model.addAttribute("allSushiFromType", owlService.getAllSushiFromType(variable));
         return "homepage";
     }
 
     @GetMapping("/sushi/search")
     public String getSearchedSushi(@RequestParam(value = "query", required = true) String searchValue, Model model){
         //System.out.println(searchValue);
-        model.addAttribute("allSushiFromType", owlService.getSushiFromName(searchValue));
+        model.addAttribute("allSushiFromType", owlService.searchSushiFromName(searchValue));
         return "homepage";
     }
 

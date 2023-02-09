@@ -55,9 +55,4 @@ public class UserController {
         return "signup_form";
     }
 
-    @GetMapping("/homepage")
-    public String getHomePage() {
-        return "homepage";
-    }
-
 }

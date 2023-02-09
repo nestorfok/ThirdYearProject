@@ -32,3 +32,8 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.table.mx-auto {
+  border: 1px solid black;
+  border-collapse: collapse;
+}

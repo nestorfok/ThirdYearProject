@@ -48,10 +48,23 @@
         <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='Nigiri')}">Roll Sushi</a>
     </div>
 </div>
-<table>
-    <tr th:each="sushi: ${allSushiFromType}">
-        <td th:text="${sushi}"></td>
-    </tr>
+<br>
+<h3 class="text-center">All Sushi</h3>
+<table class="table mx-auto" style="width:50%;">
+    <thead>
+        <tr>
+            <th>Sushi Name</th>
+            <th>Calorie(Kcal)</th>
+            <th>Price(Pounds)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="sushi: ${allSushiFromType}">
+            <td th:text="${sushi.sushiName}"></td>
+            <td th:text="${sushi.calorie}"></td>
+            <td th:text="${sushi.price}"></td>
+        </tr>
+    </tbody>
 </table>
 </body>
 </html>
