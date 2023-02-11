@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class OWLController {
@@ -33,12 +31,14 @@ public class OWLController {
     @GetMapping("/homepage")
     public String getHomePage(Model model) {
         model.addAttribute("allSushiFromType", owlService.getAllSushi());
+        model.addAttribute("selectedAllergens", Collections.emptyList());
         return "homepage";
     }
 
     @GetMapping("/sushi/{variable}")
     public String getAllSushi(@PathVariable String variable, Model model) {
         model.addAttribute("allSushiFromType", owlService.getAllSushiFromType(variable));
+        model.addAttribute("selectedAllergens", Collections.emptyList());
         return "homepage";
     }
 
@@ -46,7 +46,23 @@ public class OWLController {
     public String getSearchedSushi(@RequestParam(value = "query", required = true) String searchValue, Model model){
         //System.out.println(searchValue);
         model.addAttribute("allSushiFromType", owlService.searchSushiFromName(searchValue));
+        model.addAttribute("selectedAllergens", Collections.emptyList());
         return "homepage";
     }
+
+    /**@GetMapping("/filterSushi")
+    public String allergenFilter(@RequestParam(value = "allergens", required = false) String[] allergens, Model model){
+        //System.out.println(Arrays.asList(allergens));
+        if (allergens == null) {
+            model.addAttribute("selectedAllergens", Collections.emptyList());
+            System.out.println("empty");
+        }
+        else {
+            model.addAttribute("selectedAllergens", Arrays.asList(allergens));
+            System.out.println(Arrays.asList(allergens));
+        }
+        return "homepage";
+    }**/
+
 
 }

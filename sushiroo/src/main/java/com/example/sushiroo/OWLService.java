@@ -21,6 +21,8 @@ public class OWLService {
     private OWLReasoner r;
     private OWLAnnotationProperty labelProperty;
     private List<OWLEntity> allSushi;
+    private List<OWLEntity> currentSushiList;
+    private String[] currentFilterList;
 
     public OWLService() throws OWLOntologyCreationException {
         File file = new File("src/main/resources/static/Sushi.owl");
@@ -30,51 +32,8 @@ public class OWLService {
         this.labelProperty = df.getRDFSLabel();
     }
 
-    public List<String> getSushiFromType (String type) {
-
-        List<String> sushi = new ArrayList<>();
-        String irl = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
-        r.getSubClasses(df.getOWLClass(irl),
-                true).forEach(a -> {
-            List<String> remainders = a.entities()
-                    .map(entity -> entity.getIRI().getRemainder())
-                    .filter(Optional::isPresent)
-                    .map(Optional::get)
-                    .collect(Collectors.toList());
-            sushi.addAll(remainders);
-        });
-
-
-        for (int i = 0; i < sushi.size(); i++) {
-            String item = sushi.get(i);
-            StringBuilder modifiedItem = new StringBuilder();
-            modifiedItem.append(item.charAt(0));
-            for (int j = 1; j < item.length(); j++) {
-                if (Character.isUpperCase(item.charAt(j))) {
-                    modifiedItem.append(" ");
-                }
-                modifiedItem.append(item.charAt(j));
-            }
-            sushi.set(i, modifiedItem.toString());
-        }
-
-        return sushi;
-    }
-
-    public List<OWLEntity> searchSushiFromName (String name) {
-        List<OWLEntity> searchSushi = new ArrayList<>();
-        name = name.toLowerCase();
-        for (OWLEntity owlEntity : allSushi) {
-            String sushiName = owlEntity.getSushiName().toLowerCase();
-            if (sushiName.contains(name)) {
-                searchSushi.add(owlEntity);
-            }
-        }
-        return searchSushi;
-    }
-
     /**
-     * Get RDFSLabel from iri
+     * Get RDFSLabel from an iri
      * @param iri
      * @return RDFSLabel of the iri
      */
@@ -95,14 +54,21 @@ public class OWLService {
     }
 
     /**
-     * Get float data property from individual
+     * Get data property of an individual
+     * @param namedIndividual individual that we want to get the data property
+     * @param iri data property iri that we want to get from the individual;
+     * @return List<OWLLiteral>
      */
     public List<OWLLiteral> getDataPropertyFromIndividual (OWLNamedIndividual namedIndividual, String iri) {
         Set<OWLLiteral> literals = r.getDataPropertyValues(namedIndividual, df.getOWLDataProperty(iri));
         return new ArrayList<>(literals);
     }
 
-    public List<OWLEntity> getAllSushiFromType (String type) {
+    /** Get all sushi in OWL from a type
+     * @param type The type of sushi (E.g. VegetarianSushi)
+     * @return List<OWLEntity> of all sushi with that type
+     */
+    public List<OWLEntity> getAllSushiInOWLFromType (String type) {
         List<OWLEntity> owlEntities = new ArrayList<>();
         String irl = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
         OWLClass sushiClass = df.getOWLClass(irl);
@@ -118,15 +84,54 @@ public class OWLService {
                 float price = getDataPropertyFromIndividual(sushiIndividual,
                         "http://www.sushiro.com/ontologies/sushiro.owl#hasPrice").get(0).parseFloat();
 
-                OWLEntity owlEntity = new OWLEntity(rdfsSushiName, calories, price);
+                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri, rdfsSushiName, calories, price);
                 owlEntities.add(owlEntity);
             }
         }
         return owlEntities;
     }
 
+    /** Use for reloading the homepage */
     public List<OWLEntity> getAllSushi () {
-        this.allSushi = getAllSushiFromType("Sushi");
+        this.currentSushiList = getAllSushiInOWLFromType("Sushi");
+        this.allSushi = currentSushiList;
         return allSushi;
     }
+
+    /**
+     * Use for the search bar
+     * @param name The value of the seach bar
+     * @return List<OWLEntity> which returns all sushi that contains the value
+     */
+    public List<OWLEntity> searchSushiFromName (String name) {
+        currentSushiList= new ArrayList<>();
+        name = name.toLowerCase();
+        for (OWLEntity owlEntity : allSushi) {
+            String sushiName = owlEntity.getSushiName().toLowerCase();
+            if (sushiName.contains(name)) {
+                currentSushiList.add(owlEntity);
+            }
+        }
+        return currentSushiList;
+    }
+
+    /** Use for buttons */
+    public List<OWLEntity> getAllSushiFromType (String type) {
+        currentSushiList = new ArrayList<>();
+        String iri = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
+        OWLClass sushiClass = df.getOWLClass(iri);
+        for (OWLEntity e : allSushi) {
+            boolean isSubclass = r.isEntailed(df.getOWLClassAssertionAxiom(sushiClass, e.getNamedIndividual()));
+            if (isSubclass) {
+                currentSushiList.add(e);
+            }
+        }
+        return currentSushiList;
+    }
+
+    public List<String> filter() {
+        List<String> test = new ArrayList<>();
+        return test;
+    }
+
 }

@@ -11,7 +11,7 @@
     <div>
         <h1>Welcome</h1>
     </div>
-
+    <!--Nav Bar-->
     <div class="navbar hide" id="myNavbar">
         <a href="#">Home</a>
         <a href="#">About</a>
@@ -32,39 +32,70 @@
           }
         }
     </script>
+
+    <!-- Search bar -->
     <div class="d-flex justify-content-center">
         <form action="#" th:action="@{/sushi/search}" method="get">
             <div class='form-inline'>
                 <input class="form-control mr-2" style="width: 500px;" type="search" name="query"
-                       th:value="${search_value}" id="search" placeholder="Sushi Name" autocomplete="off" />
+                       th:value="${search_valuef}" id="search" placeholder="Sushi Name" autocomplete="off" />
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
     </div>
     <br>
+    <!-- Buttons -->
     <div>
         <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
-        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='Roll')}">Roll Sushi</a>
-        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='Nigiri')}">Roll Sushi</a>
+        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='Roll')}">Roll</a>
+        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='Nigiri')}">Nigiri</a>
+        <a class="btn btn-primary" th:href="@{/sushi/{variable}(variable='VegetarianSushi')}">Vegetarian</a>
     </div>
+    <!-- Filter -->
+    <br>
+
+    <form id="filterForm" action="#" th:action="@{/filterSushi}" method="get">
+        <input type="checkbox" name="allergens" value="peanut-allergen"
+               th:checked="${selectedAllergens.contains('peanut-allergen')}">Peanut Allergen
+        <input type="checkbox" name="allergens" value="seafood-allergen">Seafood Allergen
+        <input type="checkbox" name="allergens" value="milk-allergen">Milk Allergen
+    </form>
+    <!--
+    th:checked="${selectedAllergens.contains('peanut-allergen')}"
+    th:checked="${selectedAllergens.contains('seafood-allergen')}"
+    th:checked="${selectedAllergens.contains('milk-allergen')}
+        <script>
+          const form = document.getElementById("filterForm");
+          const checkboxes = form.elements["allergens"];
+
+          for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener("change", function() {
+              form.submit();
+            });
+          }
+        </script>
+    -->
 </div>
 <br>
-<h3 class="text-center">All Sushi</h3>
-<table class="table mx-auto" style="width:50%;">
-    <thead>
-        <tr>
-            <th>Sushi Name</th>
-            <th>Calorie(Kcal)</th>
-            <th>Price(Pounds)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="sushi: ${allSushiFromType}">
-            <td th:text="${sushi.sushiName}"></td>
-            <td th:text="${sushi.calorie}"></td>
-            <td th:text="${sushi.price}"></td>
-        </tr>
-    </tbody>
-</table>
+<div>
+    <h3 class="text-center">All Sushi</h3>
+    <table class="table mx-auto" style="width:50%;">
+        <thead>
+            <tr>
+                <th>Sushi Name</th>
+                <th>Calorie(Kcal)</th>
+                <th>Price(Pounds)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sushi: ${allSushiFromType}">
+                <td th:text="${sushi.sushiName}"></td>
+                <td th:text="${sushi.calorie}"></td>
+                <td th:text="${sushi.price}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
