@@ -22,6 +22,7 @@ public class OWLService {
     private OWLAnnotationProperty labelProperty;
     private List<OWLEntity> allSushi;
     private List<OWLEntity> currentSushiList;
+    private List<OWLEntity> currentSushiListAfterFilter;
     private List<String> currentFilterList;
 
     public OWLService() throws OWLOntologyCreationException {
@@ -84,7 +85,7 @@ public class OWLService {
                 float price = getDataPropertyFromIndividual(sushiIndividual,
                         "http://www.sushiro.com/ontologies/sushiro.owl#hasPrice").get(0).parseFloat();
 
-                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri, rdfsSushiName, calories, price);
+                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri, rdfsSushiName, calories, price, 0);
                 owlEntities.add(owlEntity);
             }
         }
@@ -93,8 +94,10 @@ public class OWLService {
 
     /** Use for reloading the homepage */
     public List<OWLEntity> getAllSushi () {
-        this.currentSushiList = getAllSushiInOWLFromType("Sushi");
-        this.allSushi = currentSushiList;
+        if (this.allSushi == null) {
+            this.currentSushiList = getAllSushiInOWLFromType("Sushi");
+            this.allSushi = currentSushiList;
+        }
         return allSushi;
     }
 
@@ -104,7 +107,9 @@ public class OWLService {
      * @return List<OWLEntity> List of sushi that contains the value
      */
     public List<OWLEntity> searchSushiFromName (String name) {
+        //currentFilterList = new ArrayList<>();
         currentSushiList= new ArrayList<>();
+        resetCurrentSushiListAfterFilter();
         name = name.toLowerCase();
         for (OWLEntity owlEntity : allSushi) {
             String sushiName = owlEntity.getSushiName().toLowerCase();
@@ -122,6 +127,7 @@ public class OWLService {
      */
     public List<OWLEntity> getAllSushiFromType (String type) {
         currentSushiList = new ArrayList<>();
+        resetCurrentSushiListAfterFilter();
         String iri = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
         OWLClass sushiClass = df.getOWLClass(iri);
         for (OWLEntity e : allSushi) {
@@ -139,7 +145,9 @@ public class OWLService {
      * @return List<OWLEntity> List of sushi after filtering the allergen
      */
     public List<OWLEntity> sushiFilter(String[] filterList) {
-        List<OWLEntity> currentResultByFilter = new ArrayList<>();
+        //List<OWLEntity> currentResultByFilter = new ArrayList<>();
+        resetCurrentSushiListAfterFilter();
+        this.currentFilterList = Arrays.asList(filterList);
         for (OWLEntity e : currentSushiList) {
             int i = 0;
             for (String s : filterList) {
@@ -153,17 +161,54 @@ public class OWLService {
                 }
             }
             if (i == filterList.length) {
-                currentResultByFilter.add(e);
+                currentSushiListAfterFilter.add(e);
             }
         }
+        //currentSushiListAfterFilter = currentResultByFilter;
         //this.currentFilterList = filterList;
         //List<String> test = new ArrayList<>();
-        return currentResultByFilter;
+        return currentSushiListAfterFilter;
     }
 
 
     public List<OWLEntity> getCurrentSushiList() {
         return currentSushiList;
+    }
+
+    public List<String> getCurrentFilterList() {
+        return currentFilterList;
+    }
+
+    public List<String> resetCurrentFilterList() {
+        currentFilterList = new ArrayList<>();
+        return currentFilterList;
+    }
+
+    public List<OWLEntity> getCurrentSushiListAfterFilter() {
+        return currentSushiListAfterFilter;
+    }
+
+    public void resetCurrentSushiListAfterFilter() {
+        currentSushiListAfterFilter = new ArrayList<>();
+    }
+
+    public void changeOrderNumber (boolean bool, String sushiName){
+        for (OWLEntity e : allSushi) {
+            if (e.getSushiName().equals(sushiName)) {
+                int i = e.getOrder();
+                //System.out.println(e.getOrder());
+                if (bool) {
+                    e.setOrder(e.getOrder() + 1);
+                } else if (i < 1) {
+                    e.setOrder(0);
+                } else {
+                    e.setOrder(e.getOrder() - 1);
+                }
+                //System.out.println(e.getOrder());
+                break;
+            }
+        }
+
     }
 
 }

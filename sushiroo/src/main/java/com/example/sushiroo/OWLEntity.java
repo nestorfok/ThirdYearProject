@@ -9,18 +9,20 @@ public class OWLEntity {
     private IRI iri;
     private float calorie;
     private float price;
+    private int order;
     private String sushiName;
 
     public OWLEntity() {
 
     }
 
-    public OWLEntity(OWLNamedIndividual namedIndividual, IRI iri, String sushiName, float calorie, float price) {
+    public OWLEntity(OWLNamedIndividual namedIndividual, IRI iri, String sushiName, float calorie, float price, int order) {
         this.namedIndividual = namedIndividual;
         this.iri = iri;
         this.sushiName = sushiName;
         this.calorie = calorie;
         this.price = price;
+        this.order = order;
     }
 
     public OWLNamedIndividual getNamedIndividual() {
@@ -43,6 +45,10 @@ public class OWLEntity {
         return price;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
     public void setNamedIndividual(OWLNamedIndividual namedIndividual) {
         this.namedIndividual = namedIndividual;
     }
@@ -61,5 +67,9 @@ public class OWLEntity {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

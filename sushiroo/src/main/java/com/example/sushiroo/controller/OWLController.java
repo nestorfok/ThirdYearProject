@@ -31,14 +31,14 @@ public class OWLController {
     @GetMapping("/homepage")
     public String getHomePage(Model model) {
         model.addAttribute("allSushiFromType", owlService.getAllSushi());
-        model.addAttribute("selectedAllergens", Collections.emptyList());
+        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         return "homepage";
     }
 
     @GetMapping("/homepage/sushi/{variable}")
     public String getAllSushi(@PathVariable String variable, Model model) {
         model.addAttribute("allSushiFromType", owlService.getAllSushiFromType(variable));
-        model.addAttribute("selectedAllergens", Collections.emptyList());
+        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         return "homepage";
     }
 
@@ -46,7 +46,7 @@ public class OWLController {
     public String getSearchedSushi(@RequestParam(value = "query", required = true) String searchValue, Model model){
         //System.out.println(searchValue);
         model.addAttribute("allSushiFromType", owlService.searchSushiFromName(searchValue));
-        model.addAttribute("selectedAllergens", Collections.emptyList());
+        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         return "homepage";
     }
 
@@ -55,15 +55,41 @@ public class OWLController {
         //System.out.println(Arrays.asList(allergens));
         //List<String> allergensList = Arrays.asList(allergens);
         if (allergens == null) {
-            model.addAttribute("selectedAllergens", Collections.emptyList());
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
+            model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
             //System.out.println("empty");
         }
         else {
-            System.out.println(Arrays.asList(allergens));
-            model.addAttribute("selectedAllergens", Arrays.asList(allergens));
-            model.addAttribute("allSushiFromType", owlService.sushiFilter(allergens));
             //System.out.println(Arrays.asList(allergens));
+            model.addAttribute("allSushiFromType", owlService.sushiFilter(allergens));
+            model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
+            //System.out.println(Arrays.asList(allergens));
+        }
+        return "homepage";
+    }
+
+    @PostMapping("/homepage/decrementOrder")
+    public String decrementOrder(@RequestParam(value = "target") String s, Model model){
+        //System.out.println(s);
+        owlService.changeOrderNumber(false, s);
+        model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
+        if (owlService.getCurrentSushiListAfterFilter().isEmpty()) {
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
+        } else {
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
+        }
+        return "homepage";
+    }
+
+    @PostMapping("/homepage/incrementOrder")
+    public String incrementOrder(@RequestParam(value = "target") String s, Model model){
+        //System.out.println(s);
+        owlService.changeOrderNumber(true, s);
+        model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
+        if (owlService.getCurrentSushiListAfterFilter().isEmpty()) {
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
+        } else {
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
         }
         return "homepage";
     }

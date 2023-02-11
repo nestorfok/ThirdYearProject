@@ -84,8 +84,9 @@
         <thead>
             <tr>
                 <th>Sushi Name</th>
-                <th>Calorie(Kcal)</th>
-                <th>Price(Pounds)</th>
+                <th>Calorie Per Sushi(Kcal)</th>
+                <th>Price Per Sushi(Pounds)</th>
+                <th>Order</th>
             </tr>
         </thead>
         <tbody>
@@ -93,6 +94,22 @@
                 <td th:text="${sushi.sushiName}"></td>
                 <td th:text="${sushi.calorie}"></td>
                 <td th:text="${sushi.price}"></td>
+                <!-- Ordering -->
+                <td>
+                    <div class="d-flex align-items-center">
+                        <form th:action="@{/homepage/decrementOrder}" method="post">
+                            <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                            <button type="submit" class="btn btn-danger">-</button>
+                        </form>
+                        <span th:text="${sushi.order}" class="mx-3"></span>
+                        <form th:action="@{/homepage/incrementOrder}" method="post">
+                            <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                            <button type="submit" class="btn btn-success">+</button>
+                        </form>
+                    </div>
+
+                </td>
+
             </tr>
         </tbody>
     </table>
