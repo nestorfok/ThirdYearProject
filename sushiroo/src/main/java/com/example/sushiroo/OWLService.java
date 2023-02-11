@@ -22,7 +22,7 @@ public class OWLService {
     private OWLAnnotationProperty labelProperty;
     private List<OWLEntity> allSushi;
     private List<OWLEntity> currentSushiList;
-    private String[] currentFilterList;
+    private List<String> currentFilterList;
 
     public OWLService() throws OWLOntologyCreationException {
         File file = new File("src/main/resources/static/Sushi.owl");
@@ -100,8 +100,8 @@ public class OWLService {
 
     /**
      * Use for the search bar
-     * @param name The value of the seach bar
-     * @return List<OWLEntity> which returns all sushi that contains the value
+     * @param name The value of the search bar
+     * @return List<OWLEntity> List of sushi that contains the value
      */
     public List<OWLEntity> searchSushiFromName (String name) {
         currentSushiList= new ArrayList<>();
@@ -115,7 +115,11 @@ public class OWLService {
         return currentSushiList;
     }
 
-    /** Use for buttons */
+    /**
+     * Use for button
+     * @param type Sushi type of the button that user press
+     * @return List<OWLEntity> List of sushi of that type
+     */
     public List<OWLEntity> getAllSushiFromType (String type) {
         currentSushiList = new ArrayList<>();
         String iri = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
@@ -129,9 +133,37 @@ public class OWLService {
         return currentSushiList;
     }
 
-    public List<String> filter() {
-        List<String> test = new ArrayList<>();
-        return test;
+    /**
+     * Use for allergen filter
+     * @param filterList List of allergens of user
+     * @return List<OWLEntity> List of sushi after filtering the allergen
+     */
+    public List<OWLEntity> sushiFilter(String[] filterList) {
+        List<OWLEntity> currentResultByFilter = new ArrayList<>();
+        for (OWLEntity e : currentSushiList) {
+            int i = 0;
+            for (String s : filterList) {
+                String iri = "http://www.sushiro.com/ontologies/sushiro.owl#" + s;
+                OWLClass sushiClass = df.getOWLClass(iri);
+                boolean isSubclass = r.isEntailed(df.getOWLClassAssertionAxiom(sushiClass, e.getNamedIndividual()));
+                if (isSubclass) {
+                    break;
+                } else {
+                    i += 1;
+                }
+            }
+            if (i == filterList.length) {
+                currentResultByFilter.add(e);
+            }
+        }
+        //this.currentFilterList = filterList;
+        //List<String> test = new ArrayList<>();
+        return currentResultByFilter;
+    }
+
+
+    public List<OWLEntity> getCurrentSushiList() {
+        return currentSushiList;
     }
 
 }
