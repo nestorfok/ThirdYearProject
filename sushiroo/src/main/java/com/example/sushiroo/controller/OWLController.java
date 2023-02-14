@@ -92,11 +92,11 @@ public class OWLController {
     @GetMapping("/homepage/return")
     public String returnHomepage(Model model) {
         if (owlService.getCurrentFilterList() != null & !(owlService.getCurrentFilterList().isEmpty())) {
-            System.out.println("1");
+            //System.out.println("1");
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
             model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
         } else {
-            System.out.println("2");
+            //System.out.println("2");
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
             model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         }
