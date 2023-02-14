@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+    <label><h3 th:text="${sushiDetail.sushiName}"></h3></label>
+    <div>
+        <div>
+            <table>
+                <tbody>
+                <td th:text="'Ingredients: ' + ${sushiDetail.ingredients}"></td>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
+        </div>
+    </div>
+</body>
+</html>

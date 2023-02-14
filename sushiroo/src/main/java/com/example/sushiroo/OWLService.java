@@ -31,6 +31,8 @@ public class OWLService {
         this.r = rf.createReasoner(o);
         r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
         this.labelProperty = df.getRDFSLabel();
+        this.currentSushiListAfterFilter = new ArrayList<>();
+        //this.currentFilterList = new ArrayList<>();
     }
 
     /**
@@ -65,6 +67,23 @@ public class OWLService {
         return new ArrayList<>(literals);
     }
 
+    public String getIngredientsFromSushiIndividual (OWLNamedIndividual namedIndividual, OWLObjectProperty prop) {
+        NodeSet<OWLNamedIndividual> owlLiterals = r.getObjectPropertyValues(namedIndividual, prop);
+        String combined = "";
+        for (Node<OWLNamedIndividual> node : owlLiterals) {
+            for (OWLNamedIndividual ingre : node) {
+                String shorty = ingre.getIRI().getShortForm();
+                String shortyRe = shorty.replaceAll("(?<=[a-z])(?=[A-Z])", " ");
+                if (combined != "") {
+                    combined = combined + ", " + shortyRe;
+                } else {
+                    combined = shortyRe;
+                }
+            }
+        }
+        return combined;
+    }
+
     /** Get all sushi in OWL from a type
      * @param type The type of sushi (E.g. VegetarianSushi)
      * @return List<OWLEntity> of all sushi with that type
@@ -74,6 +93,7 @@ public class OWLService {
         String irl = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
         OWLClass sushiClass = df.getOWLClass(irl);
         NodeSet<OWLNamedIndividual> individuals = r.getInstances(sushiClass, false);
+        OWLObjectProperty propHasIngredient = df.getOWLObjectProperty("http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient");
         for (Node<OWLNamedIndividual> node : individuals) {
             for (OWLNamedIndividual sushiIndividual : node) {
                 IRI sushiIri = sushiIndividual.getIRI();
@@ -85,7 +105,9 @@ public class OWLService {
                 float price = getDataPropertyFromIndividual(sushiIndividual,
                         "http://www.sushiro.com/ontologies/sushiro.owl#hasPrice").get(0).parseFloat();
 
-                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri, rdfsSushiName, calories, price, 0);
+                String ingredients = getIngredientsFromSushiIndividual(sushiIndividual, propHasIngredient);
+
+                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri.getShortForm(), rdfsSushiName, calories, price, 0, ingredients);
                 owlEntities.add(owlEntity);
             }
         }
@@ -107,7 +129,6 @@ public class OWLService {
      * @return List<OWLEntity> List of sushi that contains the value
      */
     public List<OWLEntity> searchSushiFromName (String name) {
-        //currentFilterList = new ArrayList<>();
         currentSushiList= new ArrayList<>();
         resetCurrentSushiListAfterFilter();
         name = name.toLowerCase();
@@ -164,9 +185,7 @@ public class OWLService {
                 currentSushiListAfterFilter.add(e);
             }
         }
-        //currentSushiListAfterFilter = currentResultByFilter;
-        //this.currentFilterList = filterList;
-        //List<String> test = new ArrayList<>();
+
         return currentSushiListAfterFilter;
     }
 
@@ -209,6 +228,16 @@ public class OWLService {
             }
         }
 
+    }
+
+    public OWLEntity getSushiDetail (String sushiName) {
+        for (OWLEntity e : allSushi) {
+            if (e.getIriShortForm().equals(sushiName)) {
+                //System.out.println("match");
+                return e;
+            }
+        }
+        return null;
     }
 
 }

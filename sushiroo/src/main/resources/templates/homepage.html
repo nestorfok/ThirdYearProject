@@ -91,7 +91,8 @@
         </thead>
         <tbody>
             <tr th:each="sushi: ${allSushiFromType}">
-                <td th:text="${sushi.sushiName}"></td>
+                <td><a th:text="${sushi.sushiName}"
+                       th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.iriShortForm})}"></a></td>
                 <td th:text="${sushi.calorie}"></td>
                 <td th:text="${sushi.price}"></td>
                 <!-- Ordering -->

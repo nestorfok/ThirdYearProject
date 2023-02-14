@@ -2,25 +2,10 @@ package com.example.sushiroo.controller;
 
 import com.example.sushiroo.OWLEntity;
 import com.example.sushiroo.OWLService;
-import com.example.sushiroo.User;
-import com.example.sushiroo.UserRepository;
-import org.semanticweb.HermiT.ReasonerFactory;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.reasoner.InferenceType;
-import org.semanticweb.owlapi.reasoner.OWLReasoner;
-import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import java.io.File;
-import java.util.*;
 
 @Controller
 public class OWLController {
@@ -90,6 +75,30 @@ public class OWLController {
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
         } else {
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
+        }
+        return "homepage";
+    }
+
+    /* Sushi Detail */
+    @GetMapping("/homepage/sushi/detail/{variable}")
+    public String getSushiDetail(@PathVariable String variable, Model model) {
+        //System.out.println("hiiii!!!!");
+        OWLEntity e = owlService.getSushiDetail(variable);
+        //System.out.println(e.getIngredients());
+        model.addAttribute("sushiDetail", owlService.getSushiDetail(variable));
+        return "detail";
+    }
+
+    @GetMapping("/homepage/return")
+    public String returnHomepage(Model model) {
+        if (owlService.getCurrentFilterList() != null & !(owlService.getCurrentFilterList().isEmpty())) {
+            System.out.println("1");
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
+            model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
+        } else {
+            System.out.println("2");
+            model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
+            model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         }
         return "homepage";
     }

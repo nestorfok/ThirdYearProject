@@ -3,34 +3,39 @@ package com.example.sushiroo;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OWLEntity {
 
     private OWLNamedIndividual namedIndividual;
-    private IRI iri;
+    private String iriShortForm;
     private float calorie;
     private float price;
     private int order;
     private String sushiName;
+    private String ingredients;
 
     public OWLEntity() {
 
     }
 
-    public OWLEntity(OWLNamedIndividual namedIndividual, IRI iri, String sushiName, float calorie, float price, int order) {
+    public OWLEntity(OWLNamedIndividual namedIndividual, String iriShortForm, String sushiName, float calorie, float price, int order, String ingredients) {
         this.namedIndividual = namedIndividual;
-        this.iri = iri;
+        this.iriShortForm = iriShortForm;
         this.sushiName = sushiName;
         this.calorie = calorie;
         this.price = price;
         this.order = order;
+        this.ingredients = ingredients;
     }
 
     public OWLNamedIndividual getNamedIndividual() {
         return namedIndividual;
     }
 
-    public IRI getIri() {
-        return iri;
+    public String getIriShortForm() {
+        return iriShortForm;
     }
 
     public String getSushiName() {
@@ -49,12 +54,16 @@ public class OWLEntity {
         return order;
     }
 
+    public String getIngredients() {
+        return ingredients;
+    }
+
     public void setNamedIndividual(OWLNamedIndividual namedIndividual) {
         this.namedIndividual = namedIndividual;
     }
 
-    public void setIri(IRI iri) {
-        this.iri = iri;
+    public void setIriShortForm(String iriShortForm) {
+        this.iriShortForm = iriShortForm;
     }
 
     public void setSushiName(String sushiName) {
@@ -71,5 +80,9 @@ public class OWLEntity {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 }
