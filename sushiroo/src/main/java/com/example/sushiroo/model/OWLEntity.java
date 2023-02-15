@@ -1,4 +1,4 @@
-package com.example.sushiroo;
+package com.example.sushiroo.model;
 
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;

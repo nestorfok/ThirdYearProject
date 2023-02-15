@@ -1,5 +1,6 @@
-package com.example.sushiroo;
+package com.example.sushiroo.model;
 
+import com.example.sushiroo.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +17,11 @@ public class UserDetail implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+
+    public Long getId() {
+        return user.getId();
     }
 
     @Override

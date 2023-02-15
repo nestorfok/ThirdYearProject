@@ -1,22 +1,15 @@
 package com.example.sushiroo.controller;
 
-import com.example.sushiroo.OWLService;
-import com.example.sushiroo.User;
-import com.example.sushiroo.UserRepository;
+import com.example.sushiroo.model.User;
+import com.example.sushiroo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 
 @Controller
@@ -53,6 +46,12 @@ public class UserController {
 
         model.addAttribute("response", response);
         return "signup_form";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return "redirect:/";
     }
 
 }

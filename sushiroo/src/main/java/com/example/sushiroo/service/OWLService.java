@@ -1,15 +1,14 @@
-package com.example.sushiroo;
+package com.example.sushiroo.service;
 
+import com.example.sushiroo.model.OWLEntity;
 import org.semanticweb.HermiT.ReasonerFactory;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.reasoner.*;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class OWLService {
@@ -239,5 +238,18 @@ public class OWLService {
         }
         return null;
     }
+
+    public List<OWLEntity> getCurrentOrder () {
+        List<OWLEntity> currentOrderList = new ArrayList<>();
+        for (OWLEntity e: allSushi) {
+            if (e.getOrder() > 0) {
+                currentOrderList.add(e);
+            }
+        }
+        return  currentOrderList;
+    }
+
+
+
 
 }

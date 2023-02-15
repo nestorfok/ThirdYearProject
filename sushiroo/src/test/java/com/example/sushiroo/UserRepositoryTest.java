@@ -1,6 +1,9 @@
 package com.example.sushiroo;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.sushiroo.model.User;
+import com.example.sushiroo.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,8 +27,8 @@ public class UserRepositoryTest {
         User user = new User();
         user.setEmail("hic@gmail.com");
         user.setPassword("Abc12345");
-        user.setFirstName("A");
-        user.setLastName("BC");
+        user.setUsername("Aaa");
+        //user.setLastName("BC");
 
         User savedUser = userRepository.save(user);
 

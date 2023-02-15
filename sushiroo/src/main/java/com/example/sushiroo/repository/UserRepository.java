@@ -1,6 +1,6 @@
-package com.example.sushiroo;
+package com.example.sushiroo.repository;
 
-import org.springframework.data.domain.Example;
+import com.example.sushiroo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

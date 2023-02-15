@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+</head>
+<body>
+    <div class="container text-center">
+        <div>
+            <br>
+            <h1>My Order</h1>
+        </div>
+        <div>
+            <table class="table mx-auto" style="width:50%;">
+                <thead>
+                    <tr>
+                        <th>Sushi Name</th>
+                        <th>Calorie Per Sushi(Kcal)</th>
+                        <th>Price Per Sushi(Pounds)</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sushi: ${currentOrder}">
+                        <td th:text="${sushi.sushiName}"></td>
+                        <td th:text="${sushi.calorie}"></td>
+                        <td th:text="${sushi.price}"></td>
+                        <!-- Ordering -->
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <form th:action="@{/myOrder/decrementOrder}" method="post">
+                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <button type="submit" class="btn btn-danger">-</button>
+                                </form>
+                                <span th:text="${sushi.order}" class="mx-3"></span>
+                                <form th:action="@{/myOrder/incrementOrder}" method="post">
+                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <button type="submit" class="btn btn-success">+</button>
+                                </form>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div>
+            <a class="btn btn-primary" th:href="@{/order/submit}">Submit Order</a>
+            <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
+        </div>
+    </div>
+</body>
+</html>

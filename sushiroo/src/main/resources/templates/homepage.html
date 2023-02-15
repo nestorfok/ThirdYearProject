@@ -9,14 +9,15 @@
 <body>
 <div class="container text-center">
     <div>
+        <br>
         <h1>Welcome</h1>
     </div>
     <!--Nav Bar-->
     <div class="navbar hide" id="myNavbar">
         <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <a th:href="@{/myOrder}">Order</a>
+        <a href="#">Setting</a>
+        <a th:href="@{/logout}">Logout</a>
     </div>
     <div id="navbarToggler">
         <span style="position:absolute; top:0; left:0; font-size:30px;cursor:pointer" onclick="toggleNavbar()">
