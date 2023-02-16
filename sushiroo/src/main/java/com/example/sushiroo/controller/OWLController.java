@@ -6,7 +6,6 @@ import com.example.sushiroo.model.UserDetail;
 import com.example.sushiroo.service.OWLService;
 import com.example.sushiroo.service.OrderService;
 import com.example.sushiroo.service.UserDetailService;
-import org.semanticweb.owlapi.model.OWLLiteral;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,13 +21,15 @@ import java.util.Optional;
 public class OWLController {
 
     @Autowired
-    private OWLService owlService;
-
-    @Autowired
     private OrderService orderService;
 
     @Autowired
+    private OWLService owlService;
+
+
+    @Autowired
     private UserDetailService userDetailService;
+
 
     @GetMapping("/homepage")
     public String getHomePage(Model model) {
@@ -38,10 +40,17 @@ public class OWLController {
             String email = authentication.getName();
             UserDetail userDetail = (UserDetail) authentication.getPrincipal();
             Long userId = userDetail.getId();
+            Optional<Order> orders = orderService.getOrderByOrderId(1L);
             System.out.println(userId);
             System.out.println(email);
+            if (orders.isPresent()) {
+                String content = orders.get().getContent();
+                System.out.println(content);
+            }
             //Optional<Order> orders = orderService.getOrderByOrderId(1L);
         }
+        //model.addAttribute("allSushiFromType", Collections.emptyList());
+        //model.addAttribute("selectedAllergens", Collections.emptyList());
         model.addAttribute("allSushiFromType", owlService.getAllSushi());
         model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
         return "homepage";
@@ -151,6 +160,8 @@ public class OWLController {
         }
         return "homepage";
     }
+
+
 
 
 }

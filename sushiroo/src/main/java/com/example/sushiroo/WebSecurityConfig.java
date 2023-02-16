@@ -47,14 +47,14 @@ public class WebSecurityConfig{
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/register",
-                            "/process_register",
-                            "/webjars/bootstrap/css/bootstrap.min.css").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/register",
+                        "/process_register",
+                        "/webjars/bootstrap/css/bootstrap.min.css").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/homepage")
+                    .defaultSuccessUrl("/homepage", true)
                     .permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll();

@@ -1,5 +1,7 @@
 package com.example.sushiroo.model;
 
+
+
 import javax.persistence.*;
 
 @Entity
@@ -10,8 +12,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @ManyToOne()
+    @JoinColumn(name = "userid", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "content")

@@ -31,6 +31,7 @@ public class OWLService {
         r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
         this.labelProperty = df.getRDFSLabel();
         this.currentSushiListAfterFilter = new ArrayList<>();
+        //this.allSushi = getAllSushiInOWLFromTypeAndCreateOWLEntity();
         //this.currentFilterList = new ArrayList<>();
     }
 
@@ -87,7 +88,7 @@ public class OWLService {
      * @param type The type of sushi (E.g. VegetarianSushi)
      * @return List<OWLEntity> of all sushi with that type
      */
-    public List<OWLEntity> getAllSushiInOWLFromType (String type) {
+    public List<OWLEntity> getAllSushiInOWLFromTypeAndCreateOWLEntity (String type) {
         List<OWLEntity> owlEntities = new ArrayList<>();
         String irl = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
         OWLClass sushiClass = df.getOWLClass(irl);
@@ -116,7 +117,7 @@ public class OWLService {
     /** Use for reloading the homepage */
     public List<OWLEntity> getAllSushi () {
         if (this.allSushi == null) {
-            this.currentSushiList = getAllSushiInOWLFromType("Sushi");
+            this.currentSushiList = getAllSushiInOWLFromTypeAndCreateOWLEntity("Sushi");
             this.allSushi = currentSushiList;
         }
         return allSushi;
@@ -248,8 +249,5 @@ public class OWLService {
         }
         return  currentOrderList;
     }
-
-
-
 
 }
