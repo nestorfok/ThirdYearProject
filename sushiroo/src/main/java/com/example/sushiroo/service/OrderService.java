@@ -21,4 +21,8 @@ public class OrderService {
     public Optional<Order> getOrderByOrderId(Long orderId) {
         return orderRepository.findById(orderId);
     }
+
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
+    }
 }

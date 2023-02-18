@@ -4,19 +4,45 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
-    <label><h3 th:text="${sushiDetail.sushiName}"></h3></label>
     <div>
+        <nav class="topnav">
+            <a th:href="@{/homepage}" class="link">Home</a>
+            <a th:href="@{/myOrder}" class="link">Order</a>
+            <a href="#" class="link">Setting</a>
+            <a th:href="@{/logout}" class="link">Logout</a>
+        </nav>
+    </div>
+    <br>
+    <div class="container text-center">
+        <label><h3 th:text="${sushiDetail.sushiName}"></h3></label>
+        <br>
+        <img th:src="@{/photo/{sushi}.png(sushi=${sushiDetail.iriShortForm})}">
+        <br>
         <div>
-            <table>
-                <tbody>
-                <td th:text="'Ingredients: ' + ${sushiDetail.ingredients}"></td>
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
+            <div>
+                <table class="table mx-auto" style="width:50%;">
+                    <tbody>
+                        <tr>
+                            <th>Ingredients:</th>
+                            <td th:text="${sushiDetail.ingredients}"></td>
+                        </tr>
+                        <tr>
+                            <th>Price:</th>
+                            <td th:text="${sushiDetail.price}"></td>
+                        </tr>
+                        <tr>
+                            <th>Calories:</th>
+                            <td th:text="${sushiDetail.calorie}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
+            </div>
         </div>
     </div>
 </body>

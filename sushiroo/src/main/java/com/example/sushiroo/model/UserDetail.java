@@ -24,6 +24,10 @@ public class UserDetail implements UserDetails {
         return user.getId();
     }
 
+    public String getName() {
+        return user.getUsername();
+    }
+
     @Override
     public String getPassword() {
         return user.getPassword();

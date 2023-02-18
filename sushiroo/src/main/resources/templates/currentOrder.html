@@ -7,6 +7,14 @@
     <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
+    <div>
+        <nav class="topnav">
+            <a th:href="@{/homepage}" class="link">Home</a>
+            <a th:href="@{/myOrder}" class="link">Order</a>
+            <a href="#" class="link">Setting</a>
+            <a th:href="@{/logout}" class="link">Logout</a>
+        </nav>
+    </div>
     <div class="container text-center">
         <div>
             <br>
@@ -30,12 +38,12 @@
                         <!-- Ordering -->
                         <td>
                             <div class="d-flex align-items-center">
-                                <form th:action="@{/myOrder/decrementOrder}" method="post">
+                                <form th:action="@{/myOrder/{variable}(variable='decrementOrder')}" method="post">
                                     <input type="hidden" name="target" th:value="${sushi.sushiName}">
                                     <button type="submit" class="btn btn-danger">-</button>
                                 </form>
                                 <span th:text="${sushi.order}" class="mx-3"></span>
-                                <form th:action="@{/myOrder/incrementOrder}" method="post">
+                                <form th:action="@{/myOrder/{variable}(variable='incrementOrder')}" method="post">
                                     <input type="hidden" name="target" th:value="${sushi.sushiName}">
                                     <button type="submit" class="btn btn-success">+</button>
                                 </form>
@@ -49,7 +57,10 @@
 
         </div>
         <div>
-            <a class="btn btn-primary" th:href="@{/order/submit}">Submit Order</a>
+            <form th:action="@{/order/submit}" method="post" th:unless="${currentOrder.isEmpty()}">
+                <button type="submit" class="btn btn-primary">Submit Order</button>
+            </form>
+            <br>
             <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
         </div>
     </div>

@@ -7,32 +7,21 @@
     <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
+<!--Nav Bar-->
+<div>
+    <nav class="topnav">
+        <a th:href="@{/homepage}" class="link">Home</a>
+        <a th:href="@{/myOrder}" class="link">Order</a>
+        <a href="#" class="link">Setting</a>
+        <a th:href="@{/logout}" class="link">Logout</a>
+    </nav>
+</div>
+
 <div class="container text-center">
     <div>
         <br>
-        <h1>Welcome</h1>
+        <h1 th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
     </div>
-    <!--Nav Bar-->
-    <div class="navbar hide" id="myNavbar">
-        <a href="#">Home</a>
-        <a th:href="@{/myOrder}">Order</a>
-        <a href="#">Setting</a>
-        <a th:href="@{/logout}">Logout</a>
-    </div>
-    <div id="navbarToggler">
-        <span style="position:absolute; top:0; left:0; font-size:30px;cursor:pointer" onclick="toggleNavbar()">
-            &#9776;</span>
-    </div>
-    <script>
-        function toggleNavbar() {
-          var x = document.getElementById("myNavbar");
-          if (x.className === "navbar hide") {
-            x.className = "navbar show";
-          } else {
-            x.className = "navbar hide";
-          }
-        }
-    </script>
 
     <!-- Search bar -->
     <div class="d-flex justify-content-center">
@@ -84,6 +73,7 @@
     <table class="table mx-auto" style="width:50%;">
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Sushi Name</th>
                 <th>Calorie Per Sushi(Kcal)</th>
                 <th>Price Per Sushi(Pounds)</th>
@@ -92,6 +82,7 @@
         </thead>
         <tbody>
             <tr th:each="sushi: ${allSushiFromType}">
+                <td><img th:src="@{/photo/{sushi}.png(sushi=${sushi.iriShortForm})}"></td>
                 <td><a th:text="${sushi.sushiName}"
                        th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.iriShortForm})}"></a></td>
                 <td th:text="${sushi.calorie}"></td>
@@ -99,12 +90,12 @@
                 <!-- Ordering -->
                 <td>
                     <div class="d-flex align-items-center">
-                        <form th:action="@{/homepage/decrementOrder}" method="post">
+                        <form th:action="@{/homepage/order/{variable}(variable='decrementOrder')}" method="post">
                             <input type="hidden" name="target" th:value="${sushi.sushiName}">
                             <button type="submit" class="btn btn-danger">-</button>
                         </form>
                         <span th:text="${sushi.order}" class="mx-3"></span>
-                        <form th:action="@{/homepage/incrementOrder}" method="post">
+                        <form th:action="@{/homepage/order/{variable}(variable='incrementOrder')}" method="post">
                             <input type="hidden" name="target" th:value="${sushi.sushiName}">
                             <button type="submit" class="btn btn-success">+</button>
                         </form>

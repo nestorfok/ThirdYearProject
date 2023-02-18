@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+/* General styles */
 
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-}
-
-img {
-    margin: 10px;
 }
 /* General styles end */
 .topnav {
@@ -32,9 +29,4 @@ img {
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
-}
-
-.table.mx-auto {
-  border: 1px solid black;
-  border-collapse: collapse;
 }

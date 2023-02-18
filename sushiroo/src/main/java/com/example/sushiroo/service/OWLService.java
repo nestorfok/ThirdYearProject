@@ -31,7 +31,6 @@ public class OWLService {
         r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
         this.labelProperty = df.getRDFSLabel();
         this.currentSushiListAfterFilter = new ArrayList<>();
-        //this.allSushi = getAllSushiInOWLFromTypeAndCreateOWLEntity();
         //this.currentFilterList = new ArrayList<>();
     }
 
@@ -249,5 +248,14 @@ public class OWLService {
         }
         return  currentOrderList;
     }
+
+    /* Set all current order to 0 */
+    public void resetAllSushiOrder(){
+        for (OWLEntity e: allSushi) {
+            e.setOrder(0);
+        }
+    }
+
+
 
 }

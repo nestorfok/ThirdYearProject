@@ -15,6 +15,8 @@ public class UserDetailService implements UserDetailsService {
     @Autowired
     private UserDetailRepository userDetailRepository;
 
+    private User user;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userDetailRepository.findByEmail(email);
@@ -22,6 +24,18 @@ public class UserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         return new UserDetail(user);
+    }
+
+    public User getCurrentUser() {
+        return user;
+    }
+
+    public void setCurrentUser(Long id, String username, String email, String password) {
+        user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
     }
 
 }

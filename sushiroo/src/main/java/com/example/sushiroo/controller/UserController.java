@@ -54,4 +54,9 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/testing")
+    public String test() {
+        return "testing";
+    }
+
 }

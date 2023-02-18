@@ -49,7 +49,9 @@ public class WebSecurityConfig{
                 .authorizeRequests()
                 .antMatchers("/register",
                         "/process_register",
-                        "/webjars/bootstrap/css/bootstrap.min.css").permitAll()
+                        "/webjars/bootstrap/css/bootstrap.min.css",
+                        "/testing",
+                        "/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
