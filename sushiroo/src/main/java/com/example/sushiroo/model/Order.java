@@ -3,6 +3,7 @@ package com.example.sushiroo.model;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -18,6 +19,8 @@ public class Order {
 
     @Column(name = "content")
     private String content;
+
+    private LocalDateTime date;
 
     public Long getId() {
         return id;
@@ -43,4 +46,11 @@ public class Order {
         this.content = content;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 }

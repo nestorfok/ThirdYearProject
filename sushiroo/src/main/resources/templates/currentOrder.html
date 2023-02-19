@@ -11,7 +11,7 @@
         <nav class="topnav">
             <a th:href="@{/homepage}" class="link">Home</a>
             <a th:href="@{/myOrder}" class="link">Order</a>
-            <a href="#" class="link">Setting</a>
+            <a th:href="@{/setting}" class="link">Setting</a>
             <a th:href="@{/logout}" class="link">Logout</a>
         </nav>
     </div>
@@ -58,6 +58,9 @@
         </div>
         <div>
             <form th:action="@{/order/submit}" method="post" th:unless="${currentOrder.isEmpty()}">
+                <label for="orderTime">Date and time to get order:</label>
+                <input type="datetime-local" id="orderTime" name="orderTime" th:min="${minimumDateTime}"
+                       th:max="${maximumDateTime}" required>
                 <button type="submit" class="btn btn-primary">Submit Order</button>
             </form>
             <br>

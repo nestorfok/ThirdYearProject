@@ -123,7 +123,7 @@ public class UserController {
                 }
             }
             /* Validate new password */
-            if (newPassword.length()>0) {
+            if (newPassword.length() > 0) {
                 String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(newPassword);
@@ -138,25 +138,11 @@ public class UserController {
             }
             if (i != 0) {
                 userRepository.save(currentUser);
+                model.addAttribute("user", currentUser);
+                model.addAttribute("error", "Success!");
+                return "setting";
             }
         }
-        /*
-        //BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        //String encodedNewPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        //String encodeCurrentPassword = bCryptPasswordEncoder.encode(pass);
-        System.out.println(user.getUsername());
-        System.out.println(user.getEmail());
-        if (!(user.getPassword().isEmpty())) {
-            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-            String encodedCurrentPassword = bCryptPasswordEncoder.encode(curPass);
-            if (encodedCurrentPassword.equals(currentUser.getPassword())) {
-                user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            }
-        }
-        if (user.getPassword().isEmpty()) {
-            System.out.println("yes");
-        }
-        */
         //System.out.println(user.getPassword());
         return "redirect:/setting";
     }

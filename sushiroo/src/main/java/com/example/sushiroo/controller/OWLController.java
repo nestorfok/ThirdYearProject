@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -112,12 +113,24 @@ public class OWLController {
         } else if (variable.equals("incrementOrder")){
             owlService.changeOrderNumber(true, s);
         }
+        orderService.setDateTimeToCurrent();
+        orderService.setFutureDateTime(0, 1);
+        model.addAttribute("minimumDateTime", orderService.getLocalDateTime());
+        orderService.setFutureDateTime(10, 0);
+        model.addAttribute("maximumDateTime", orderService.getLocalDateTime());
+
         model.addAttribute("currentOrder", owlService.getCurrentOrder());
         return "currentOrder";
     }
 
     @GetMapping("/myOrder")
     public String viewMyOrder(Model model) {
+        orderService.setDateTimeToCurrent();
+        orderService.setFutureDateTime(0, 1);
+        model.addAttribute("minimumDateTime", orderService.getLocalDateTime());
+        orderService.setFutureDateTime(10, 0);
+        model.addAttribute("maximumDateTime", orderService.getLocalDateTime());
+
         model.addAttribute("currentOrder", owlService.getCurrentOrder());
         return "currentOrder";
     }
@@ -145,7 +158,7 @@ public class OWLController {
     }
 
     @PostMapping("/order/submit")
-    public String submitOrder() {
+    public String submitOrder(@RequestParam(value = "orderTime") String date) {
         List<OWLEntity> currentOrder = owlService.getCurrentOrder();
 
         if (currentOrder.isEmpty()) {
@@ -160,6 +173,7 @@ public class OWLController {
         }
         order.setUser(user);
         order.setContent(content);
+        order.setDate(LocalDateTime.parse(date, orderService.getFormatter()));
         orderService.saveOrder(order);
         owlService.resetAllSushiOrder();
         return "redirect:/homepage";
