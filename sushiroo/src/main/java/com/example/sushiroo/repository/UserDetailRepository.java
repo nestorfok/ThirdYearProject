@@ -8,4 +8,5 @@ public interface UserDetailRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.email = ?1")
     User findByEmail(String email);
+
 }

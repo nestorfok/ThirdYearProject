@@ -8,6 +8,7 @@ import java.util.List;
 
 public class OWLEntity {
 
+    //private int id;
     private OWLNamedIndividual namedIndividual;
     private String iriShortForm;
     private float calorie;
@@ -29,6 +30,7 @@ public class OWLEntity {
         this.order = order;
         this.ingredients = ingredients;
     }
+
 
     public OWLNamedIndividual getNamedIndividual() {
         return namedIndividual;
@@ -85,4 +87,5 @@ public class OWLEntity {
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
+
 }

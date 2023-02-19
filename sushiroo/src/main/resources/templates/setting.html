@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+    <title>Setting</title>
+</head>
+<body>
+    <nav class="topnav">
+        <a th:href="@{/homepage}" class="link">Home</a>
+        <a th:href="@{/myOrder}" class="link">Order</a>
+        <a th:href="@{/setting}" class="link">Setting</a>
+        <a th:href="@{/logout}" class="link">Logout</a>
+    </nav>
+    <div class="container text-center">
+        <br>
+        <h3>Setting</h3>
+        <p>You must type in your current password to change any of your detail!</p>
+        <p>Leave a detail in blank if you don't want to change it!</p>
+        <form th:action="@{/setting/save}" th:object="${user}" method="post" style="max-width: 600px; margin: 0 auto;">
+            <div class="m-3">
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Username:</label>
+                    <div class="col-5">
+                        <input type="text" class="form-control" th:field="*{username}" th:value="${user.username}"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Email:</label>
+                    <div class="col-5">
+                        <input type="email" class="form-control" th:field="*{email}" th:value="${user.email}"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">New Password:</label>
+                    <div class="col-5">
+                        <input type="password" class="form-control" th:field="*{password}" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4">Current Password:</label>
+                    <div class="col-5">
+                        <input type="password" name="currentPassword" class="form-control"/>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </div>
+            </div>
+        </form>
+        <div>
+            <p th:text="${error}">Error Message</p>
+        </div>
+        <div>
+            <p>Password Requirements</p>
+            <ul>
+                <li>Must have at least one numeric character</li>
+                <li>Must have at least one lowercase character</li>
+                <li>Must have at least one uppercase character</li>
+                <li>Must have at least one special symbol among @#$%</li>
+                <li>Password length should be between 8 and 20</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -37,27 +37,13 @@ public class OWLController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("first");
         if (authentication != null && authentication.isAuthenticated()) {
-            if (userDetailService.getCurrentUser() == null) {
-                UserDetail userDetail = (UserDetail) authentication.getPrincipal();
-                Long userId = userDetail.getId();
-                String username = userDetail.getName();
-                String email = authentication.getName();
-                String password = userDetail.getPassword();
-                userDetailService.setCurrentUser(userId, username, email, password);
-            }
-            //System.out.println("hiiii");
+            UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+            Long userId = userDetail.getId();
+            String username = userDetail.getName();
+            String email = authentication.getName();
+            String password = userDetail.getPassword();
+            userDetailService.setCurrentUser(userId, username, email, password);
 
-            //Optional<Order> orders = orderService.getOrderByOrderId(1L);
-
-            //addUserName();
-            //model.addAttribute("userName", userDetail.getName());
-            /*
-            if (orders.isPresent()) {
-                String content = orders.get().getContent();
-                System.out.println(content);
-            }
-             */
-            //Optional<Order> orders = orderService.getOrderByOrderId(1L);
         }
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         model.addAttribute("allSushiFromType", owlService.getAllSushi());
@@ -84,8 +70,6 @@ public class OWLController {
 
     @GetMapping("/homepage/filterSushi")
     public String allergenFilter(@RequestParam(value = "allergens", required = false) String[] allergens, Model model){
-        //System.out.println(Arrays.asList(allergens));
-        //List<String> allergensList = Arrays.asList(allergens);
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         if (allergens == null) {
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
@@ -93,10 +77,8 @@ public class OWLController {
             //System.out.println("empty");
         }
         else {
-            //System.out.println(Arrays.asList(allergens));
             model.addAttribute("allSushiFromType", owlService.sushiFilter(allergens));
             model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
-            //System.out.println(Arrays.asList(allergens));
         }
         return "homepage";
     }
@@ -143,9 +125,6 @@ public class OWLController {
     /* Sushi Detail */
     @GetMapping("/homepage/sushi/detail/{variable}")
     public String getSushiDetail(@PathVariable String variable, Model model) {
-        //System.out.println("hiiii!!!!");
-        OWLEntity e = owlService.getSushiDetail(variable);
-        //System.out.println(e.getIngredients());
         model.addAttribute("sushiDetail", owlService.getSushiDetail(variable));
         return "detail";
     }
