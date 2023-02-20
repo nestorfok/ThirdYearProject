@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Sushiroo</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
-    <div class="container text-center">
-        <div>
-            <h1>Hi</h1>
-        </div>
-        <div>
-            <h3><a th:href="@{/register}">Register</a></h3>
-            <h3><a th:href="@{/login}">Login</a></h3>
-        </div>
+    <div>
+        <nav class="topnav">
+            <a th:href="@{/}" class="link">Home</a>
+            <a th:href="@{/login}" class="link">Login</a>
+            <a th:href="@{/register}" class="link">Register</a>
+            <a th:href="@{/aboutUs}" class="link">About us</a>
+        </nav>
     </div>
+
+    <div class="title">
+        <h1>Welcome to Sushiro!!!</h1>
+    </div>
+
 </body>
 </html>

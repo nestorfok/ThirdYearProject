@@ -41,10 +41,36 @@ public class UserController {
     @PostMapping("/process_register")
     public String processRegistration(User user, Model model) {
         String response = "";
-        Optional<User> existUser = userRepository.findByEmail(user.getEmail());
-        if(existUser.isPresent()){
-            response = "Error: User exist";
+        Optional<User> existEmailUser = userRepository.findByEmail(user.getEmail());
+        Optional<User> existUsernameUser = userRepository.findByUsername(user.getUsername());
+        String regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(user.getPassword());
+
+        if (existUsernameUser.isPresent()) {
+            response = "Error: Username was used already!";
+            model.addAttribute("response", response);
+            return "signup_form";
         }
+
+        if (existEmailUser.isPresent()){
+            response = "Error: Email was used already!";
+            model.addAttribute("response", response);
+            return "signup_form";
+        }
+
+        if (user.getUsername().length() != 0 & user.getUsername().length() > 15) {
+            response = "Username has to be greater than 0 character " + "and less than 20 characters!";
+            model.addAttribute("response", response);
+            return "signup_form";
+        }
+
+        if (!(matcher.matches())) {
+            response = "Invalid password!";
+            model.addAttribute("response", response);
+            return "signup_form";
+        }
+
         else {
             BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
             String encodePassword = bCryptPasswordEncoder.encode(user.getPassword());

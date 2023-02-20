@@ -3,14 +3,12 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    background: #fe8c00;
+    //background: #DAAD86;
+    background: #E8A87C;
+    //background: #ffb15e;
     color: #f2f2f2;
 }
 
-img {
-    margin: 10px;
-}
-/* General styles end */
 .topnav {
   position: relative;
   overflow: hidden;
@@ -23,7 +21,7 @@ img {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 25px;
 }
 
 .topnav a:hover {
@@ -36,13 +34,29 @@ img {
   color: white;
 }
 
-
-.table.mx-auto {
-  border: 5px solid #f2f2f2;
-  border-collapse: collapse;
+.title {
+  margin-top: 15%;
+  text-align: center;
 }
 
-ul.passwordRequirements {
+.title h1 {
+  font-size: 100px;
+}
+
+.container.text-center {
+  margin-top: 20px;
+}
+
+.passwordRequirements {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 25px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #f2f2f2;
+}
+
+.passwordRequirements ul {
   display: inline-block;
   text-align: left;
 }
