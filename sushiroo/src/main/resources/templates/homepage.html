@@ -60,47 +60,45 @@
       }
     </script>
 
-<div>
-    <br>
-    <h3 class="text-center"><b>All Sushi</b></h3>
-    <br>
-    <table class="table mx-auto" style="width:50%;">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Sushi Name</th>
-                <th>Calorie Per Sushi(Kcal)</th>
-                <th>Price Per Sushi(Pounds)</th>
-                <th>Order</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="sushi: ${allSushiFromType}">
-                <td><img th:src="@{/photo/{sushi}.png(sushi=${sushi.iriShortForm})}"></td>
-                <td><a th:text="${sushi.sushiName}"
-                       th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.iriShortForm})}"></a></td>
-                <td th:text="${sushi.calorie}"></td>
-                <td th:text="${sushi.price}"></td>
-                <!-- Ordering -->
-                <td>
-                    <div class="d-flex align-items-center">
-                        <form th:action="@{/homepage/order/{variable}(variable='decrementOrder')}" method="post">
-                            <input type="hidden" name="target" th:value="${sushi.sushiName}">
-                            <button type="submit" class="btn btn-danger">-</button>
-                        </form>
-                        <span th:text="${sushi.order}" class="mx-3"></span>
-                        <form th:action="@{/homepage/order/{variable}(variable='incrementOrder')}" method="post">
-                            <input type="hidden" name="target" th:value="${sushi.sushiName}">
-                            <button type="submit" class="btn btn-success">+</button>
-                        </form>
-                    </div>
-
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container text-center">
+        <div class="homepage-menu">
+            <h3 class="homepage-menu-text">Menu</h3>
+            <table class="homepage-menu-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Sushi Name</th>
+                        <th>Calorie Per Sushi(Kcal)</th>
+                        <th>Price Per Sushi(Pounds)</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sushi: ${allSushiFromType}">
+                        <td><img th:src="@{/photo/{sushi}.png(sushi=${sushi.iriShortForm})}"></td>
+                        <td><a th:text="${sushi.sushiName}"
+                               th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.iriShortForm})}"></a></td>
+                        <td th:text="${sushi.calorie}"></td>
+                        <td th:text="${sushi.price}"></td>
+                        <!-- Ordering -->
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <form th:action="@{/homepage/order/{variable}(variable='decrementOrder')}" method="post">
+                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <button type="submit" class="btn btn-danger">-</button>
+                                </form>
+                                <span th:text="${sushi.order}" class="mx-3"></span>
+                                <form th:action="@{/homepage/order/{variable}(variable='incrementOrder')}" method="post">
+                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <button type="submit" class="btn btn-success">+</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </body>
 </html>
