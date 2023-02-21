@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+    <link rel="stylesheet" th:href="@{/css/setting.css}">
     <title>Setting</title>
 </head>
 <body>
@@ -13,12 +13,13 @@
         <a th:href="@{/setting}" class="link">Setting</a>
         <a th:href="@{/logout}" class="link">Logout</a>
     </nav>
-    <div class="container text-center">
+    <!-- Form header and form -->
+    <div class="settingInformation">
         <br>
         <h3>Setting</h3>
-        <p>You must type in your current password to change any of your detail!</p>
-        <p>Leave a detail in blank if you don't want to change it!</p>
-        <form th:action="@{/setting/save}" th:object="${user}" method="post" style="max-width: 600px; margin: 0 auto;">
+        <p>* You must type in your current password to change any of your detail!</p>
+        <p>* Leave a detail in blank if you don't want to change it!</p>
+        <form th:action="@{/setting/save}" th:object="${user}" method="post">
             <div class="m-3">
                 <div class="form-group row">
                     <label class="col-form-label col-4">Username:</label>
@@ -49,12 +50,16 @@
                 </div>
             </div>
         </form>
-        <div>
-            <p th:text="${error}">Error Message</p>
-        </div>
-        <div>
+    </div>
+    <!-- error message -->
+    <div class="error-msg">
+        <p th:text="${error}">Error Message</p>
+    </div>
+
+    <div class="container text-center">
+        <div class="passwordRequirements">
             <p>Password Requirements</p>
-            <ul class="passwordRequirements">
+            <ul>
                 <li>Must have at least one numeric character</li>
                 <li>Must have at least one lowercase character</li>
                 <li>Must have at least one uppercase character</li>
@@ -63,5 +68,6 @@
             </ul>
         </div>
     </div>
+
 </body>
 </html>

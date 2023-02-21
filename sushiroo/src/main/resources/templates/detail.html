@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
 </head>
 <body>
     <div>
@@ -15,15 +15,12 @@
             <a th:href="@{/logout}" class="link">Logout</a>
         </nav>
     </div>
-    <br>
     <div class="container text-center">
-        <label><h3 th:text="${sushiDetail.sushiName}"></h3></label>
-        <br>
-        <img th:src="@{/photo/{sushi}.png(sushi=${sushiDetail.iriShortForm})}">
-        <br>
-        <div>
+        <div class="detail">
+            <h3 th:text="${sushiDetail.sushiName}"></h3>
+            <img th:src="@{/photo/{sushi}.png(sushi=${sushiDetail.iriShortForm})}">
             <div>
-                <table class="table mx-auto" style="width:50%;">
+                <table class="detail-table">
                     <tbody>
                         <tr>
                             <th>Ingredients:</th>
@@ -40,10 +37,10 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
-            </div>
         </div>
+    </div>
+    <div class="container text-center">
+        <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
     </div>
 </body>
 </html>

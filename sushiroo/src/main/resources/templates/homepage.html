@@ -7,54 +7,48 @@
     <link rel="stylesheet" th:href="@{/css/homepage.css}">
 </head>
 <body>
-<!--Nav Bar-->
-<div>
-    <nav class="topnav">
-        <a th:href="@{/homepage}" class="link">Home</a>
-        <a th:href="@{/myOrder}" class="link">Order</a>
-        <a th:href="@{/setting}" class="link">Setting</a>
-        <a th:href="@{/logout}" class="link">Logout</a>
-    </nav>
-</div>
-
-<div class="container text-center">
+    <!--Nav Bar-->
     <div>
-        <br>
-        <h1 th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
+        <nav class="topnav">
+            <a th:href="@{/homepage}" class="link">Home</a>
+            <a th:href="@{/myOrder}" class="link">Order</a>
+            <a th:href="@{/setting}" class="link">Setting</a>
+            <a th:href="@{/logout}" class="link">Logout</a>
+        </nav>
     </div>
+
+    <!--Header-->
+    <h1 class="homepage-header" th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
 
     <!-- Search bar -->
-    <div class="d-flex justify-content-center">
+    <div class="homepage-searchform">
         <form action="#" th:action="@{/homepage/sushi/search}" method="get">
-            <div class='form-inline'>
-                <input class="form-control mr-2" style="width: 500px;" type="search" name="query"
-                       th:value="${search_valuef}" id="search" placeholder="Sushi Name" autocomplete="off" />
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+            <input class="homepage-searchform-bar" type="search" name="query"
+                   th:value="${search_valuef}" id="search" placeholder="Sushi Name" autocomplete="off" />
+            <button type="submit" class="btn btn-primary" id="homepage-searchform-button">Search</button>
         </form>
     </div>
-    <br>
+
     <!-- Buttons -->
-    <div>
-        <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
+    <div class="homepage-quickAccess">
+        <label class="homepage-quickAccess-label">Quick Access Buttons:</label>
+        <a class="btn btn-primary" id="homepage-quickAccess-button-1" th:href="@{/homepage/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
         <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Roll')}">Roll</a>
         <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Nigiri')}">Nigiri</a>
-        <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='VegetarianSushi')}">Vegetarian</a>
+        <a class="btn btn-primary" id="homepage-quickAccess-button-2" th:href="@{/homepage/sushi/{variable}(variable='VegetarianSushi')}">Vegetarian</a>
     </div>
-    <!-- Filter -->
-    <br>
 
-    <form id="filterForm" action="#" th:action="@{/homepage/filterSushi}" method="get">
-        <input type="checkbox" name="allergens" value="CrustaceanShellfishAllergenSushi"
-               th:checked="${selectedAllergens.contains('CrustaceanShellfishAllergenSushi')}">Seafood Allergen
-        <input type="checkbox" name="allergens" value="MilkAllergenSushi"
-               th:checked="${selectedAllergens.contains('MilkAllergenSushi')}">Milk Allergen
+    <!-- Filter -->
+    <form class="homepage-filterForm" id="filterForm" action="#" th:action="@{/homepage/filterSushi}" method="get">
+        <label>Allergens:</label>
+        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="CrustaceanShellfishAllergenSushi"
+               th:checked="${selectedAllergens.contains('CrustaceanShellfishAllergenSushi')}">
+        <span>Seafood Allergen</span>
+        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="MilkAllergenSushi"
+               th:checked="${selectedAllergens.contains('MilkAllergenSushi')}">
+        <span>Milk Allergen</span>
     </form>
-    <!--
-    th:checked="${selectedAllergens.contains('peanut-allergen')}"
-    th:checked="${selectedAllergens.contains('seafood-allergen')}"
-    th:checked="${selectedAllergens.contains('milk-allergen')}
-    -->
+
     <script>
       const form = document.getElementById("filterForm");
       const checkboxes = form.elements["allergens"];
@@ -66,8 +60,6 @@
       }
     </script>
 
-</div>
-<br>
 <div>
     <br>
     <h3 class="text-center"><b>All Sushi</b></h3>

@@ -30,3 +30,8 @@ body {
   background-color: #04AA6D;
   color: white;
 }
+
+.passwordRequirements ul {
+  display: inline-block;
+  text-align: center;
+}

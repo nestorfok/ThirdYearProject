@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" th:href="@{/css/homepage.css}">
+    <link rel="stylesheet" th:href="@{/css/currentOrder.css}">
 </head>
 <body>
     <div>
@@ -15,57 +15,53 @@
             <a th:href="@{/logout}" class="link">Logout</a>
         </nav>
     </div>
+    <!-- Order content -->
+    <div class="orderContent text-center">
+        <h1>My Order</h1>
+        <table class="orderContentTable">
+            <thead>
+                <tr>
+                    <th>Sushi Name</th>
+                    <th>Calorie Per Sushi(Kcal)</th>
+                    <th>Price Per Sushi(Pounds)</th>
+                    <th>Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sushi: ${currentOrder}">
+                    <td th:text="${sushi.sushiName}"></td>
+                    <td th:text="${sushi.calorie}"></td>
+                    <td th:text="${sushi.price}"></td>
+                    <!-- Ordering -->
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <form th:action="@{/myOrder/{variable}(variable='decrementOrder')}" method="post">
+                                <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                <button type="submit" class="btn btn-danger">-</button>
+                            </form>
+                            <span th:text="${sushi.order}" class="mx-3"></span>
+                            <form th:action="@{/myOrder/{variable}(variable='incrementOrder')}" method="post">
+                                <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                <button type="submit" class="btn btn-success">+</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Order form -->
+    <div>
+        <form class="order-form" th:action="@{/order/submit}" method="post" th:unless="${currentOrder.isEmpty()}">
+            <label for="orderTime">Date and time to get order:</label>
+            <input type="datetime-local" id="orderTime" name="orderTime" th:min="${minimumDateTime}"
+                   th:max="${maximumDateTime}" required>
+            <button type="submit" class="btn btn-primary" id="order-form-submit">Submit Order</button>
+        </form>
+    </div>
+    <!-- return button -->
     <div class="container text-center">
-        <div>
-            <br>
-            <h1>My Order</h1>
-        </div>
-        <div>
-            <table class="table mx-auto" style="width:50%;">
-                <thead>
-                    <tr>
-                        <th>Sushi Name</th>
-                        <th>Calorie Per Sushi(Kcal)</th>
-                        <th>Price Per Sushi(Pounds)</th>
-                        <th>Order</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="sushi: ${currentOrder}">
-                        <td th:text="${sushi.sushiName}"></td>
-                        <td th:text="${sushi.calorie}"></td>
-                        <td th:text="${sushi.price}"></td>
-                        <!-- Ordering -->
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <form th:action="@{/myOrder/{variable}(variable='decrementOrder')}" method="post">
-                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
-                                    <button type="submit" class="btn btn-danger">-</button>
-                                </form>
-                                <span th:text="${sushi.order}" class="mx-3"></span>
-                                <form th:action="@{/myOrder/{variable}(variable='incrementOrder')}" method="post">
-                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
-                                    <button type="submit" class="btn btn-success">+</button>
-                                </form>
-                            </div>
-
-                        </td>
-
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
-        <div>
-            <form th:action="@{/order/submit}" method="post" th:unless="${currentOrder.isEmpty()}">
-                <label for="orderTime">Date and time to get order:</label>
-                <input type="datetime-local" id="orderTime" name="orderTime" th:min="${minimumDateTime}"
-                       th:max="${maximumDateTime}" required>
-                <button type="submit" class="btn btn-primary">Submit Order</button>
-            </form>
-            <br>
-            <a class="btn btn-primary" th:href="@{/homepage/return}">Back</a>
-        </div>
+        <a class="btn btn-primary" id="back-button" th:href="@{/homepage/return}">Back</a>
     </div>
 </body>
 </html>
