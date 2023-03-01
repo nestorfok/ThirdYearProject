@@ -100,7 +100,9 @@ public class OWLController {
         } else {
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
         }
+
         return "homepage";
+        //return "redirect:/homepage#rightHere";
 
     }
 

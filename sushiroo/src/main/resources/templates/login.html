@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/indexAndSignup.css}">
+</head>
+<body>
+    <div>
+        <nav class="topnav">
+            <a th:href="@{/}" class="link">Home</a>
+            <a th:href="@{/login}" class="link">Login</a>
+            <a th:href="@{/register}" class="link">Register</a>
+            <a th:href="@{/aboutUs}" class="link">About us</a>
+        </nav>
+        <div class="container text-center">
+            <div>
+                <h1>Login</h1>
+            </div>
+            <div>
+                <form th:action="@{/login}" method="post" style="max-width: 600px; margin: 0 auto;">
+                    <div class="m-3">
+                        <div class="form-group row">
+                            <label class="col-form-label col-4">Email:</label>
+                            <div class="col-5">
+                                <input type="email" class="form-control" id="email" name="email" required/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-form-label col-4">Password:</label>
+                            <div class="col-5">
+                                <input type="password" class="form-control" id="password" name="password" required/>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
