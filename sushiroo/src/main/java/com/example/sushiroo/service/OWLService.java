@@ -31,7 +31,7 @@ public class OWLService {
         r.precomputeInferences(InferenceType.CLASS_HIERARCHY);
         this.labelProperty = df.getRDFSLabel();
         this.currentSushiListAfterFilter = new ArrayList<>();
-        //this.currentFilterList = new ArrayList<>();
+        this.currentFilterList = new ArrayList<>();
     }
 
     /**
@@ -93,6 +93,7 @@ public class OWLService {
         OWLClass sushiClass = df.getOWLClass(irl);
         NodeSet<OWLNamedIndividual> individuals = r.getInstances(sushiClass, false);
         OWLObjectProperty propHasIngredient = df.getOWLObjectProperty("http://www.sushiro.com/ontologies/sushiro.owl#hasIngredient");
+        int i = 0;
         for (Node<OWLNamedIndividual> node : individuals) {
             for (OWLNamedIndividual sushiIndividual : node) {
                 IRI sushiIri = sushiIndividual.getIRI();
@@ -106,8 +107,9 @@ public class OWLService {
 
                 String ingredients = getIngredientsFromSushiIndividual(sushiIndividual, propHasIngredient);
 
-                OWLEntity owlEntity = new OWLEntity(sushiIndividual, sushiIri.getShortForm(), rdfsSushiName, calories, price, 0, ingredients);
+                OWLEntity owlEntity = new OWLEntity(i, sushiIndividual, sushiIri.getShortForm(), rdfsSushiName, calories, price, 0, ingredients);
                 owlEntities.add(owlEntity);
+                i++;
             }
         }
         return owlEntities;
@@ -116,8 +118,8 @@ public class OWLService {
     /** Use for reloading the homepage */
     public List<OWLEntity> getAllSushi () {
         if (this.allSushi == null) {
-            this.currentSushiList = getAllSushiInOWLFromTypeAndCreateOWLEntity("Sushi");
-            this.allSushi = currentSushiList;
+            this.allSushi = getAllSushiInOWLFromTypeAndCreateOWLEntity("Sushi");
+            this.currentSushiList = allSushi;
         }
         return allSushi;
     }
@@ -128,8 +130,10 @@ public class OWLService {
      * @return List<OWLEntity> List of sushi that contains the value
      */
     public List<OWLEntity> searchSushiFromName (String name) {
-        currentSushiList= new ArrayList<>();
-        resetCurrentSushiListAfterFilter();
+        System.out.println("1");
+        currentSushiList = new ArrayList<>();
+        currentSushiListAfterFilter = new ArrayList<>();
+        currentFilterList = new ArrayList<>();
         name = name.toLowerCase();
         for (OWLEntity owlEntity : allSushi) {
             String sushiName = owlEntity.getSushiName().toLowerCase();
@@ -137,6 +141,8 @@ public class OWLService {
                 currentSushiList.add(owlEntity);
             }
         }
+        System.out.println(allSushi);
+        System.out.println(currentSushiList);
         return currentSushiList;
     }
 
@@ -147,7 +153,8 @@ public class OWLService {
      */
     public List<OWLEntity> getAllSushiFromType (String type) {
         currentSushiList = new ArrayList<>();
-        resetCurrentSushiListAfterFilter();
+        currentSushiListAfterFilter = new ArrayList<>();
+        currentFilterList = new ArrayList<>();
         String iri = "http://www.sushiro.com/ontologies/sushiro.owl#" + type;
         OWLClass sushiClass = df.getOWLClass(iri);
         for (OWLEntity e : allSushi) {
@@ -166,7 +173,7 @@ public class OWLService {
      */
     public List<OWLEntity> sushiFilter(String[] filterList) {
         //List<OWLEntity> currentResultByFilter = new ArrayList<>();
-        resetCurrentSushiListAfterFilter();
+        currentSushiListAfterFilter = new ArrayList<>();
         this.currentFilterList = Arrays.asList(filterList);
         for (OWLEntity e : currentSushiList) {
             int i = 0;
@@ -197,46 +204,30 @@ public class OWLService {
         return currentFilterList;
     }
 
-    public List<String> resetCurrentFilterList() {
-        currentFilterList = new ArrayList<>();
-        return currentFilterList;
+    public void setCurrentFilterList(List<String> currentFilterList) {
+        this.currentFilterList = currentFilterList;
     }
 
     public List<OWLEntity> getCurrentSushiListAfterFilter() {
         return currentSushiListAfterFilter;
     }
 
-    public void resetCurrentSushiListAfterFilter() {
-        currentSushiListAfterFilter = new ArrayList<>();
+    public void changeOrderNumber (boolean bool, int s){
+        OWLEntity e = allSushi.get(s);
+        int order = e.getOrder();
+        if (bool) {
+            e.setOrder(order + 1);
+        }
+        else if (order < 1) {
+            e.setOrder(0);
+        }
+        else {
+            e.setOrder(order - 1);
+        }
     }
 
-    public void changeOrderNumber (boolean bool, String sushiName){
-        for (OWLEntity e : allSushi) {
-            if (e.getSushiName().equals(sushiName)) {
-                int i = e.getOrder();
-                //System.out.println(e.getOrder());
-                if (bool) {
-                    e.setOrder(e.getOrder() + 1);
-                } else if (i < 1) {
-                    e.setOrder(0);
-                } else {
-                    e.setOrder(e.getOrder() - 1);
-                }
-                //System.out.println(e.getOrder());
-                break;
-            }
-        }
-
-    }
-
-    public OWLEntity getSushiDetail (String sushiName) {
-        for (OWLEntity e : allSushi) {
-            if (e.getIriShortForm().equals(sushiName)) {
-                //System.out.println("match");
-                return e;
-            }
-        }
-        return null;
+    public OWLEntity getSushiDetail (int id) {
+        return allSushi.get(id);
     }
 
     public List<OWLEntity> getCurrentOrder () {
@@ -254,6 +245,16 @@ public class OWLService {
         for (OWLEntity e: allSushi) {
             e.setOrder(0);
         }
+    }
+
+    public void resetAllSushi() {
+        this.allSushi = null;
+    }
+
+    public int changeListByIndex(int i) {
+        OWLEntity e = allSushi.get(i);
+        e.setOrder(e.getOrder() + 1);
+        return e.getOrder();
     }
 
 

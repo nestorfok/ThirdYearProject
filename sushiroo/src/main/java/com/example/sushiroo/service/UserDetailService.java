@@ -38,6 +38,10 @@ public class UserDetailService implements UserDetailsService {
         user.setPassword(password);
     }
 
+    public void userLogout() {
+        user = null;
+    }
+
 
 
 }

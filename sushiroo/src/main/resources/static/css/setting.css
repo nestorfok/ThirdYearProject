@@ -4,8 +4,10 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     //background: #DAAD86;
-    background: #E8A87C;
+    //background: #2d2832;
     //background: #ffb15e;
+    background: url("/photo/bg4.png") no-repeat center fixed;
+    background-size: cover;
     color: #f2f2f2;
 }
 
@@ -13,6 +15,7 @@ body {
   position: relative;
   overflow: hidden;
   //background-color: #333;
+  background-color: rgba(45,40,50,0.8);
 }
 
 .topnav a {
@@ -35,7 +38,19 @@ body {
 }
 
 .settingInformation {
-  text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 10px;
+    border-radius: 25px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #f2f2f2;
+    //background: #2d2832;
+    background-color: rgba(45,40,50,0.8);
 }
 
 .settingInformation h3 {
@@ -58,16 +73,18 @@ body {
 
 .passwordRequirements {
   display: inline-block;
-  width: 50%;
+  margin-top: 30px;
   padding: 10px;
   border-radius: 25px;
   border-width: 5px;
   border-style: solid;
   border-color: #f2f2f2;
+  background-color: rgba(45,40,50,0.8);
 }
 
 .passwordRequirements ul {
   display: inline-block;
   text-align: left;
 }
+
 

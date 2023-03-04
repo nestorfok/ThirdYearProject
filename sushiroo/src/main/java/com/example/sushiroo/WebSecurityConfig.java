@@ -51,7 +51,8 @@ public class WebSecurityConfig{
                         "/process_register",
                         "/webjars/bootstrap/css/bootstrap.min.css",
                         "/testing",
-                        "/css/**").permitAll()
+                        "/css/**",
+                        "/photo/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

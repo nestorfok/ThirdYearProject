@@ -15,6 +15,7 @@
     </nav>
     <!-- Form header and form -->
     <div class="settingInformation">
+
         <br>
         <h3>Setting</h3>
         <p>* You must type in your current password to change any of your detail!</p>
@@ -50,10 +51,12 @@
                 </div>
             </div>
         </form>
-    </div>
-    <!-- error message -->
-    <div class="error-msg">
-        <p th:text="${error}">Error Message</p>
+
+        <!-- error message -->
+        <div class="error-msg">
+            <p th:text="${error}">Error Message</p>
+        </div>
+
     </div>
 
     <div class="container text-center">
@@ -68,6 +71,7 @@
             </ul>
         </div>
     </div>
+
 
 </body>
 </html>

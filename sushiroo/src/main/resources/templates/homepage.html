@@ -17,6 +17,7 @@
         </nav>
     </div>
 
+    <div class="homepage-searchfuction">
     <!--Header-->
     <h1 class="homepage-header" th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
 
@@ -31,7 +32,7 @@
 
     <!-- Buttons -->
     <div class="homepage-quickAccess">
-        <label class="homepage-quickAccess-label">Quick Access Buttons:</label>
+        <label class="homepage-quickAccess-label">Types:</label>
         <a class="btn btn-primary" id="homepage-quickAccess-button-1" th:href="@{/homepage/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
         <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Roll')}">Roll</a>
         <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Nigiri')}">Nigiri</a>
@@ -40,13 +41,16 @@
 
     <!-- Filter -->
     <form class="homepage-filterForm" id="filterForm" action="#" th:action="@{/homepage/filterSushi}" method="get">
-        <label>Allergens:</label>
+        <label>Removing sushi dishes with allergies:</label>
         <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="CrustaceanShellfishAllergenSushi"
                th:checked="${selectedAllergens.contains('CrustaceanShellfishAllergenSushi')}">
-        <span>Seafood Allergen</span>
+        <span>Crustaceans Allergy</span>
         <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="MilkAllergenSushi"
                th:checked="${selectedAllergens.contains('MilkAllergenSushi')}">
-        <span>Milk Allergen</span>
+        <span>Milk Allergy</span>
+        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="EggAllergenSushi"
+               th:checked="${selectedAllergens.contains('EggAllergenSushi')}">
+        <span>Egg Allergy</span>
     </form>
 
     <script>
@@ -59,6 +63,7 @@
         });
       }
     </script>
+    </div>
 
     <div class="container text-center">
         <div class="homepage-menu">
@@ -77,19 +82,37 @@
                     <tr th:each="sushi: ${allSushiFromType}">
                         <td><img th:src="@{/photo/{sushi}.png(sushi=${sushi.iriShortForm})}"></td>
                         <td><a th:text="${sushi.sushiName}"
-                               th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.iriShortForm})}"></a></td>
+                               th:href="@{/homepage/sushi/detail/{variable}(variable=${sushi.id})}"></a></td>
                         <td th:text="${sushi.calorie}"></td>
                         <td th:text="${sushi.price}"></td>
                         <!-- Ordering -->
                         <td>
                             <div class="d-flex align-items-center">
+                                <!--
+                                <button th:onclick="incrementValue(${sushi.id})" class="btn btn-success">+</button>
+                                <label th:attr="id='label-' + ${sushi.id}" th:text="${sushi.order}" class="mx-3"></label>
+                                <script>
+                                    function incrementValue(index) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "/incrementValues",
+                                            data: { index: index },
+                                            success: function (result) {
+                                                $("#label-" + index).text(result);
+                                            }
+                                        });
+                                    }
+                                </script>
+                                -->
                                 <form th:action="@{/homepage/order/{variable}(variable='decrementOrder')}" method="post">
-                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <input type="hidden" name="target" th:value="${sushi.id}">
                                     <button type="submit" class="btn btn-danger">-</button>
                                 </form>
+
                                 <span th:text="${sushi.order}" class="mx-3"></span>
+
                                 <form th:action="@{/homepage/order/{variable}(variable='incrementOrder')}" method="post">
-                                    <input type="hidden" name="target" th:value="${sushi.sushiName}">
+                                    <input type="hidden" name="target" th:value="${sushi.id}">
                                     <button type="submit" class="btn btn-success">+</button>
                                 </form>
                             </div>
@@ -99,9 +122,6 @@
             </table>
         </div>
     </div>
-    <p id="rightHere">
-        ASDASDASDASD
-    </p>
 
 </body>
 </html>

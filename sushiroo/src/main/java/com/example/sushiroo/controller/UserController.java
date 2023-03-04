@@ -2,6 +2,7 @@ package com.example.sushiroo.controller;
 
 import com.example.sushiroo.model.User;
 import com.example.sushiroo.repository.UserRepository;
+import com.example.sushiroo.service.OWLService;
 import com.example.sushiroo.service.UserDetailService;
 import org.apache.commons.codec.language.bm.Rule;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserDetailService userDetailService;
+
+    @Autowired
+    private OWLService owlService;
 
     @GetMapping("")
     public String viewHomePage(){
@@ -91,6 +95,8 @@ public class UserController {
     @GetMapping("/logout")
     public String logout() {
         SecurityContextHolder.getContext().setAuthentication(null);
+        userDetailService.userLogout();
+        owlService.resetAllSushi();
         return "redirect:/";
     }
 

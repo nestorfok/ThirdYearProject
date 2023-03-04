@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -32,31 +33,33 @@ public class OWLController {
     @Autowired
     private UserDetailService userDetailService;
 
-
     @GetMapping("/homepage")
     public String getHomePage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("first");
         if (authentication != null && authentication.isAuthenticated()) {
-            UserDetail userDetail = (UserDetail) authentication.getPrincipal();
-            Long userId = userDetail.getId();
-            String username = userDetail.getName();
-            String email = authentication.getName();
-            String password = userDetail.getPassword();
-            userDetailService.setCurrentUser(userId, username, email, password);
-
+            if (userDetailService.getCurrentUser() == null) {
+                UserDetail userDetail = (UserDetail) authentication.getPrincipal();
+                Long userId = userDetail.getId();
+                String username = userDetail.getName();
+                String email = authentication.getName();
+                String password = userDetail.getPassword();
+                userDetailService.setCurrentUser(userId, username, email, password);
+            }
         }
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         model.addAttribute("allSushiFromType", owlService.getAllSushi());
-        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
+        owlService.setCurrentFilterList(new ArrayList<>());
+        model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
         return "homepage";
     }
 
     @GetMapping("/homepage/sushi/{variable}")
     public String getAllSushi(@PathVariable String variable, Model model) {
+        System.out.println("hi");
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         model.addAttribute("allSushiFromType", owlService.getAllSushiFromType(variable));
-        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
+        model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
         return "homepage";
     }
 
@@ -65,7 +68,7 @@ public class OWLController {
         //System.out.println(searchValue);
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         model.addAttribute("allSushiFromType", owlService.searchSushiFromName(searchValue));
-        model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
+        model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
         return "homepage";
     }
 
@@ -73,8 +76,9 @@ public class OWLController {
     public String allergenFilter(@RequestParam(value = "allergens", required = false) String[] allergens, Model model){
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
         if (allergens == null) {
+            owlService.setCurrentFilterList(new ArrayList<>());
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
-            model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
+            model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
             //System.out.println("empty");
         }
         else {
@@ -86,14 +90,14 @@ public class OWLController {
 
     /* Change order of a sushi in homepage */
     @PostMapping("/homepage/order/{variable}")
-    public String changeOrder(@RequestParam(value = "target") String s, @PathVariable String variable, Model model){
-        model.addAttribute("currentUser", userDetailService.getCurrentUser());
+    public String changeOrder(@RequestParam(value = "target") int s, @PathVariable String variable, Model model){
         if (variable.equals("decrementOrder")) {
             owlService.changeOrderNumber(false, s);
         } else if (variable.equals("incrementOrder")){
             owlService.changeOrderNumber(true, s);
         }
         List<String> currentFilterList = owlService.getCurrentFilterList();
+        model.addAttribute("currentUser", userDetailService.getCurrentUser());
         model.addAttribute("selectedAllergens", currentFilterList);
         if (currentFilterList.isEmpty()) {
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
@@ -102,13 +106,12 @@ public class OWLController {
         }
 
         return "homepage";
-        //return "redirect:/homepage#rightHere";
 
     }
 
     /* Change order of a sushi in currentOrder page */
     @PostMapping("/myOrder/{variable}")
-    public String decrementOrderInMyOrder(@RequestParam(value = "target") String s,  @PathVariable String variable, Model model){
+    public String decrementOrderInMyOrder(@RequestParam(value = "target") int s,  @PathVariable String variable, Model model){
         //System.out.println(s);
         if (variable.equals("decrementOrder")) {
             owlService.changeOrderNumber(false, s);
@@ -139,7 +142,8 @@ public class OWLController {
 
     /* Sushi Detail */
     @GetMapping("/homepage/sushi/detail/{variable}")
-    public String getSushiDetail(@PathVariable String variable, Model model) {
+    public String getSushiDetail(@PathVariable int variable, Model model) {
+        //OWLEntity e = owlService.getSushiDetail(variable);
         model.addAttribute("sushiDetail", owlService.getSushiDetail(variable));
         return "detail";
     }
@@ -147,14 +151,15 @@ public class OWLController {
     @GetMapping("/homepage/return")
     public String returnHomepage(Model model) {
         model.addAttribute("currentUser", userDetailService.getCurrentUser());
-        if (owlService.getCurrentFilterList() != null & !(owlService.getCurrentFilterList().isEmpty())) {
+        List<String> currentFilterList = owlService.getCurrentFilterList();
+        if (!(currentFilterList.isEmpty())) {
             //System.out.println("1");
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiListAfterFilter());
-            model.addAttribute("selectedAllergens", owlService.getCurrentFilterList());
+            model.addAttribute("selectedAllergens", currentFilterList);
         } else {
             //System.out.println("2");
             model.addAttribute("allSushiFromType", owlService.getCurrentSushiList());
-            model.addAttribute("selectedAllergens", owlService.resetCurrentFilterList());
+            model.addAttribute("selectedAllergens", currentFilterList);
         }
         return "homepage";
     }
@@ -180,6 +185,13 @@ public class OWLController {
         owlService.resetAllSushiOrder();
         return "redirect:/homepage";
     }
+
+    @PostMapping("/incrementValues")
+    public Integer incrementHi(@RequestParam("index") Integer index) {
+        System.out.println("hiiiiiiiiiiiasdasdas");
+        return owlService.changeListByIndex(index);
+    }
+
 
 
 }
