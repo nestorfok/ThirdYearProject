@@ -66,6 +66,25 @@ body {
   margin: 0 auto;
 }
 
+.button {
+  font-size: 22px;
+  width: 220px;
+  height: 70px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: white;
+  background-color: #030105;
+  color: #f2f2f2;
+}
+
+.button:hover {
+    text-decoration: none;
+    color:white;
+    background-color: #2f105a;
+}
+
+
+
 .error-msg {
   text-align: center;
   color: red;

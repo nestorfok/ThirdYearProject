@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class OWLService {
@@ -130,19 +132,56 @@ public class OWLService {
      * @return List<OWLEntity> List of sushi that contains the value
      */
     public List<OWLEntity> searchSushiFromName (String name) {
-        System.out.println("1");
         currentSushiList = new ArrayList<>();
         currentSushiListAfterFilter = new ArrayList<>();
         currentFilterList = new ArrayList<>();
-        name = name.toLowerCase();
-        for (OWLEntity owlEntity : allSushi) {
-            String sushiName = owlEntity.getSushiName().toLowerCase();
-            if (sushiName.contains(name)) {
-                currentSushiList.add(owlEntity);
+        String regex = "[pc][<>](\\d+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(name);
+        if(matcher.matches()) {
+            char pOrC = name.charAt(0);
+            char lOrG = name.charAt(1);
+            int pOrCValue = Integer.parseInt(matcher.group(1));
+            if (lOrG == '<') {
+                if (pOrC == 'p') {
+                    for (OWLEntity owlEntity: allSushi) {
+                        if (owlEntity.getPrice()<pOrCValue){
+                            currentSushiList.add(owlEntity);
+                        }
+                    }
+                } else {
+                    for (OWLEntity owlEntity: allSushi) {
+                        if (owlEntity.getCalorie()<pOrCValue){
+                            currentSushiList.add(owlEntity);
+                        }
+                    }
+                }
+            } else {
+                if (pOrC == 'p') {
+                    for (OWLEntity owlEntity: allSushi) {
+                        if (owlEntity.getPrice()>pOrCValue){
+                            currentSushiList.add(owlEntity);
+                        }
+                    }
+                } else {
+                    for (OWLEntity owlEntity: allSushi) {
+                        if (owlEntity.getCalorie()>pOrCValue){
+                            currentSushiList.add(owlEntity);
+                        }
+                    }
+                }
+            }
+        } else {
+            name = name.toLowerCase();
+            for (OWLEntity owlEntity : allSushi) {
+                String sushiName = owlEntity.getSushiName().toLowerCase();
+                if (sushiName.contains(name)) {
+                    currentSushiList.add(owlEntity);
+                }
             }
         }
-        System.out.println(allSushi);
-        System.out.println(currentSushiList);
+        //System.out.println(allSushi);
+        //System.out.println(currentSushiList);
         return currentSushiList;
     }
 

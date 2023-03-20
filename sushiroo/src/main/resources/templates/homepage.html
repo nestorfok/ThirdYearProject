@@ -18,51 +18,79 @@
     </div>
 
     <div class="homepage-searchfuction">
-    <!--Header-->
-    <h1 class="homepage-header" th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
+        <!--Header-->
+        <h1 class="homepage-header" th:text="Welcome + ' ' + ${currentUser.username}">Welcome</h1>
 
-    <!-- Search bar -->
-    <div class="homepage-searchform">
-        <form action="#" th:action="@{/homepage/sushi/search}" method="get">
-            <input class="homepage-searchform-bar" type="search" name="query"
-                   th:value="${search_valuef}" id="search" placeholder="Sushi Name" autocomplete="off" />
-            <button type="submit" class="btn btn-primary" id="homepage-searchform-button">Search</button>
+        <!-- Search bar -->
+        <div class="homepage-searchform">
+            <form action="#" th:action="@{/homepage/sushi/search}" method="get">
+                <input class="homepage-searchform-bar" type="search" name="query"
+                       th:value="${search_valuef}" id="search" placeholder="Search Your Sushi Dishes" autocomplete="off" />
+                <button type="submit" class="btn btn-primary" id="homepage-searchform-button">Search</button>
+            </form>
+        </div>
+
+        <div class="homepage-searchform-text">
+            <span>Type "sushi dish name" to search by name. E.g. salmon</span><br>
+            <span>Type "p" + ("<" or ">") + "price" to search by price. E.g. p<59</span><br>
+            <span>Type "c" + ("<" or ">") + "calories" to search by calories. E.g. c>59</span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="homepage-quickAccess">
+            <label class="homepage-quickAccess-label">Types:</label>
+            <a class="btn btn-primary" id="homepage-quickAccess-button-1" th:href="@{/homepage/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
+            <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Roll')}">Roll</a>
+            <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Nigiri')}">Nigiri</a>
+            <a class="btn btn-primary" id="homepage-quickAccess-button-2" th:href="@{/homepage/sushi/{variable}(variable='VegetarianSushi')}">Vegetarian</a>
+        </div>
+
+        <!-- Filter -->
+        <form class="homepage-filterForm" id="filterForm" action="#" th:action="@{/homepage/filterSushi}" method="get">
+            <label>Removing sushi dishes with allergies:</label>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="CrustaceanShellfishAllergenSushi"
+                   th:checked="${selectedAllergens.contains('CrustaceanShellfishAllergenSushi')}">
+            <span>Crustaceans Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="EggAllergenSushi"
+                   th:checked="${selectedAllergens.contains('EggAllergenSushi')}">
+            <span>Egg Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="FishAllergenSushi"
+                   th:checked="${selectedAllergens.contains('FishAllergenSushi')}">
+            <span>Fish Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="GlutenAllergenSushi"
+                   th:checked="${selectedAllergens.contains('GlutenAllergenSushi')}">
+            <span>Gluten Allergy</span>
+            <br>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="MilkAllergenSushi"
+                   th:checked="${selectedAllergens.contains('MilkAllergenSushi')}">
+            <span>Milk Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="PeanutAllergenSushi"
+                   th:checked="${selectedAllergens.contains('PeanutAllergenSushi')}">
+            <span>Peanut Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="SesameAllergenSushi"
+                   th:checked="${selectedAllergens.contains('SesameAllergenSushi')}">
+            <span>Sesame Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="SoyAllergenSushi"
+                   th:checked="${selectedAllergens.contains('SoyAllergenSushi')}">
+            <span>Soy Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="TreeNutAllergenSushi"
+                   th:checked="${selectedAllergens.contains('TreeNutAllergenSushi')}">
+            <span>Tree Nut Allergy</span>
+            <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="WheatAllergenSushi"
+                   th:checked="${selectedAllergens.contains('WheatAllergenSushi')}">
+            <span>Wheat Allergy</span>
         </form>
-    </div>
 
-    <!-- Buttons -->
-    <div class="homepage-quickAccess">
-        <label class="homepage-quickAccess-label">Types:</label>
-        <a class="btn btn-primary" id="homepage-quickAccess-button-1" th:href="@{/homepage/sushi/{variable}(variable='NamedSushi')}">All Sushi</a>
-        <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Roll')}">Roll</a>
-        <a class="btn btn-primary" th:href="@{/homepage/sushi/{variable}(variable='Nigiri')}">Nigiri</a>
-        <a class="btn btn-primary" id="homepage-quickAccess-button-2" th:href="@{/homepage/sushi/{variable}(variable='VegetarianSushi')}">Vegetarian</a>
-    </div>
+        <script>
+          const form = document.getElementById("filterForm");
+          const checkboxes = form.elements["allergens"];
 
-    <!-- Filter -->
-    <form class="homepage-filterForm" id="filterForm" action="#" th:action="@{/homepage/filterSushi}" method="get">
-        <label>Removing sushi dishes with allergies:</label>
-        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="CrustaceanShellfishAllergenSushi"
-               th:checked="${selectedAllergens.contains('CrustaceanShellfishAllergenSushi')}">
-        <span>Crustaceans Allergy</span>
-        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="MilkAllergenSushi"
-               th:checked="${selectedAllergens.contains('MilkAllergenSushi')}">
-        <span>Milk Allergy</span>
-        <input class="homepage-filterForm-checkbox" type="checkbox" name="allergens" value="EggAllergenSushi"
-               th:checked="${selectedAllergens.contains('EggAllergenSushi')}">
-        <span>Egg Allergy</span>
-    </form>
-
-    <script>
-      const form = document.getElementById("filterForm");
-      const checkboxes = form.elements["allergens"];
-
-      for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("change", function() {
-          form.submit();
-        });
-      }
-    </script>
+          for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener("change", function() {
+              form.submit();
+            });
+          }
+        </script>
     </div>
 
     <div class="container text-center">

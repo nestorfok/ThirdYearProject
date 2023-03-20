@@ -105,6 +105,14 @@ h1 {
   width: 180px;
   font-size: 20px;
   border-radius: 25px;
+  border-color: white;
+  background-color: #030105;
+}
+
+#order-form-submit:hover {
+    text-decoration: none;
+    color:white;
+    background-color: #2f105a;
 }
 
 #back-button {
@@ -114,4 +122,12 @@ h1 {
   font-size: 30px;
   text-align: center;
   border-radius: 25px;
+  border-color: white;
+  background-color: #030105;
+}
+
+#back-button:hover {
+   text-decoration: none;
+   color:white;
+   background-color: #2f105a;
 }

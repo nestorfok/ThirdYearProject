@@ -36,7 +36,6 @@ public class OWLController {
     @GetMapping("/homepage")
     public String getHomePage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("first");
         if (authentication != null && authentication.isAuthenticated()) {
             if (userDetailService.getCurrentUser() == null) {
                 UserDetail userDetail = (UserDetail) authentication.getPrincipal();

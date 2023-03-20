@@ -38,6 +38,10 @@ body {
   color: white;
 }
 
+.topnav-right {
+    float: right;
+}
+
 .title {
   //margin-top: 10px;
   text-align: center;
@@ -76,5 +80,26 @@ body {
 .passwordRequirements ul {
   display: inline-block;
   text-align: left;
+}
+
+.button {
+  font-size: 22px;
+  width: 110px;
+  height: 55px;
+  border-radius: 15px;
+  border-style: solid;
+  //border-color: #F19c30;
+  border-color: white;
+  //background-color: #5b20af;
+  background-color: #030105;
+  //background-color: #2f105a;
+  //background-color: #705892;
+  color: #f2f2f2;
+}
+
+.button:hover {
+    text-decoration: none;
+    color:white;
+    background-color: #2f105a;
 }
 

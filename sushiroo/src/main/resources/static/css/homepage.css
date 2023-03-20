@@ -63,7 +63,6 @@ img {
     margin-right: auto;
     margin-left: auto;
     margin-top: 20px;
-    margin-bottom: 40px;
     text-align: center;
 }
 
@@ -90,11 +89,25 @@ img {
     height: 60px;
     font-size: 22px;
     border-radius: 20px;
+    border-color: white;
+    background-color: #030105;
+}
+
+#homepage-searchform-button:hover {
+    background-color: #2f105a;
+}
+
+.homepage-searchform-text {
+    text-align: left;
+    color: red;
+    margin-left:200px;
+    margin-top: 5px;
+    margin-bottom: 25px;
 }
 
 .homepage-quickAccess {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
 }
 
 .homepage-quickAccess-label {
@@ -109,6 +122,13 @@ img {
     //padding: 10px;
     margin-left: 10px;
     border-radius: 20px;
+    border-color: white;
+    background-color: #030105;
+}
+
+.homepage-quickAccess a:hover {
+    border-color: white;
+    background-color: #2f105a;
 }
 
 #homepage-quickAccess-button-1 {
@@ -137,7 +157,7 @@ img {
 .homepage-filterForm-checkbox {
     width: 15px;
     height: 15px;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .homepage-menu {
@@ -169,5 +189,9 @@ img {
 
 .homepage-menu-table td {
   font-size: 16px;
+}
+
+.homepage-menu-table a {
+  color: white;
 }
 
