@@ -10,3 +10,6 @@
 4. Set Project SDK to version 15.0.2
 5. Connect to University of Manchester VPN
 6. Run the Code
+7. Username and Password for testing:
+	- fok@gmail.com
+	- Fok123@fok
