@@ -49,6 +49,7 @@
                 </tr>
             </tbody>
         </table>
+        <div th:if="${param.success}" class="orderMsg">Order Placed!</div>
         <!-- Order form -->
         <div>
             <form class="order-form" th:action="@{/order/submit}" method="post" th:unless="${currentOrder.isEmpty()}">

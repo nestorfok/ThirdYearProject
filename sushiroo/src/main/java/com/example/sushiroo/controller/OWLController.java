@@ -164,7 +164,7 @@ public class OWLController {
     }
 
     @PostMapping("/order/submit")
-    public String submitOrder(@RequestParam(value = "orderTime") String date) {
+    public String submitOrder(@RequestParam(value = "orderTime") String date, Model model) {
         List<OWLEntity> currentOrder = owlService.getCurrentOrder();
 
         if (currentOrder.isEmpty()) {
@@ -182,7 +182,7 @@ public class OWLController {
         order.setDate(LocalDateTime.parse(date, orderService.getFormatter()));
         orderService.saveOrder(order);
         owlService.resetAllSushiOrder();
-        return "redirect:/homepage";
+        return "redirect:/myOrder?success";
     }
 
     @PostMapping("/incrementValues")
