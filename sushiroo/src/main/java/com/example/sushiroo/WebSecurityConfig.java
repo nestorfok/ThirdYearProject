@@ -50,7 +50,6 @@ public class WebSecurityConfig{
                 .antMatchers("/register",
                         "/process_register",
                         "/webjars/bootstrap/css/bootstrap.min.css",
-                        "/testing",
                         "/css/**",
                         "/photo/**").permitAll()
                 .anyRequest().authenticated()

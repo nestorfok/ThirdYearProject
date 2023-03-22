@@ -89,12 +89,14 @@ img {
     height: 60px;
     font-size: 22px;
     border-radius: 20px;
+    border-style: solid;
     border-color: white;
     background-color: #030105;
 }
 
 #homepage-searchform-button:hover {
-    background-color: #2f105a;
+    background-color: #030105;
+    opacity: 0.8;
 }
 
 .homepage-searchform-text {
@@ -119,16 +121,17 @@ img {
     width: 100px;
     height: 45px;
     font-size: 22px;
-    //padding: 10px;
     margin-left: 10px;
     border-radius: 20px;
+    border-style: solid;
     border-color: white;
     background-color: #030105;
 }
 
 .homepage-quickAccess a:hover {
     border-color: white;
-    background-color: #2f105a;
+    background-color: #030105;
+    opacity: 0.8;
 }
 
 #homepage-quickAccess-button-1 {
@@ -160,6 +163,14 @@ img {
     border-radius: 12px;
 }
 
+.container {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+}
+
 .homepage-menu {
   margin-top: 30px;
   display: inline-block;
@@ -174,17 +185,22 @@ img {
 .homepage-menu-text {
     font-size: 45px;
     margin: 20px;
+    text-align: center;
 }
 
-.homepage-menu-table {
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .homepage-menu-table th {
     font-size: 20px;
     margin-bottom: 80px;
     border-bottom: 5px solid #f2f2f2;
+}
+
+#thCalorie {
+    margin-left: 10px;
+}
+
+#thPrice {
+    margin-left: 10px;
 }
 
 .homepage-menu-table td {

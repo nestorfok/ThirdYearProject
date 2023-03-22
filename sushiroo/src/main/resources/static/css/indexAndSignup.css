@@ -3,10 +3,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    //background: #DAAD86;
-    //background: #E8A87C;
-    //background: #ffb15e;
-    //background: #0B0C10;
     background: url("/photo/bg4.png") no-repeat center fixed;
     background-size: cover;
     color: #f2f2f2;
@@ -15,7 +11,6 @@ body {
 .topnav {
   position: relative;
   overflow: hidden;
-  //background-color: #333;
   background-color: rgba(45,40,50,0.8);
 }
 
@@ -43,12 +38,20 @@ body {
 }
 
 .title {
-  //margin-top: 10px;
-  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1500px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    border-radius: 15px;
+    background-color: rgba(45,40,50,0.8);
 }
 
 .title h1 {
-  font-size: 100px;
+  font-size: 135px;
 }
 
 .imgContainer {
@@ -73,7 +76,6 @@ body {
   border-width: 5px;
   border-style: solid;
   border-color: #f2f2f2;
-  //background-color: #2d2832;
   background-color: rgba(45,40,50,0.8);
 }
 
@@ -88,18 +90,27 @@ body {
   height: 55px;
   border-radius: 15px;
   border-style: solid;
-  //border-color: #F19c30;
   border-color: white;
-  //background-color: #5b20af;
   background-color: #030105;
-  //background-color: #2f105a;
-  //background-color: #705892;
   color: #f2f2f2;
 }
 
 .button:hover {
     text-decoration: none;
     color:white;
-    background-color: #2f105a;
+    opacity: 0.8;
+}
+
+.error-msg {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-size: 22px;
+    background-color: rgba(45,40,50,0.8);
 }
 

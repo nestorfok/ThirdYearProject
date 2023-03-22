@@ -44,6 +44,9 @@
                 </form>
             </div>
         </div>
+        <div th:if="${param.error}" class="error-msg">
+            Incorrect Username or Password!
+        </div>
     </div>
 </body>
 </html>

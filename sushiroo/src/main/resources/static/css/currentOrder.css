@@ -3,9 +3,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    //background: #DAAD86;
-    //background: #E8A87C;
-    //background: #ffb15e;
     background: url("/photo/bg4.png") no-repeat center fixed;
     background-size: cover;
     color: #f2f2f2;
@@ -104,7 +101,8 @@ h1 {
   height: 45px;
   width: 180px;
   font-size: 20px;
-  border-radius: 25px;
+  border-radius: 20px;
+  border-style: solid;
   border-color: white;
   background-color: #030105;
 }
@@ -112,7 +110,7 @@ h1 {
 #order-form-submit:hover {
     text-decoration: none;
     color:white;
-    background-color: #2f105a;
+    opacity: 0.8;
 }
 
 #back-button {
@@ -121,13 +119,13 @@ h1 {
   width: 150px;
   font-size: 30px;
   text-align: center;
-  border-radius: 25px;
+  border-radius: 20px;
+  border-style: solid;
   border-color: white;
   background-color: #030105;
 }
 
 #back-button:hover {
    text-decoration: none;
-   color:white;
-   background-color: #2f105a;
+   opacity: 0.8;
 }
